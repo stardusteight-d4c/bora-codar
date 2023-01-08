@@ -109,48 +109,71 @@ export const Player = ({
   }
 
   return (
-    <div className="w-[500px] p-2 text-white flex flex-col items-center justify-center bg-gray-700 h-fit">
-      <div>
-        <p>{currentSong.artist}</p>
+    <div className="player  min-w-[490px] max-w-[490px] p-[38px] rounded-[10px] text-white flex flex-col items-center justify-center h-fit">
+      <div className="flex items-center justify-center w-full">
+        <img
+          src={currentSong?.cover}
+          className="w-[100px] h-[100px] rounded-lg"
+        />
+        <div className="flex flex-col items-center justify-center mx-auto">
+          <p className="text-white font-bold text-2xl">{currentSong.music}</p>
+          <span>{currentSong.artist}</span>
+        </div>
       </div>
-      <div className="w-full cursor-pointer">
+      <div className="w-full cursor-pointer mt-4">
         <div className="flex items-center justify-between">
           <span>{formatTime(currentSong.currentTime)}</span>
           <span>{formatTime(currentSong.duration)}</span>
         </div>
         <div
-          className="w-full bg-white h-2"
+          className="w-full bg-white/30 shadow-inner shadow-black/10 h-2 overflow-hidden rounded-full"
           onClick={(e) => checkWidth(e)}
           ref={progressBarElementRef}
         >
           <div
             style={{ width: `${currentSong.progress + '%'}` }}
-            className="bg-green-400 h-2"
+            className="bg-white h-2 rounded-full"
           />
         </div>
       </div>
-      <div className="flex items-center gap-x-4 mt-2">
-        <i
-          className="ri-rewind-mini-fill cursor-pointer text-xl"
-          onClick={back}
-        />
-        {isPlaying ? (
+      <div className="flex items-center justify-between w-full mt-2">
+        <div className="min-w-[80px] max-w-[80px]">
+          <div className="sliderContainer text-2xl flex items-center justify-center gap-x-2">
+            {VolumeBtns()}
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={volume}
+              onChange={(e) => handleVolume(e)}
+              className="rangeSlider cursor-pointer"
+            />
+          </div>
+        </div>
+        <div className='flex items-center justify-center gap-x-4'>
           <i
-            className="ri-pause-mini-line cursor-pointer text-xl"
-            onClick={handlePlay}
+            className="ri-rewind-mini-fill cursor-pointer text-2xl"
+            onClick={back}
           />
-        ) : (
+          {isPlaying ? (
+            <i
+              className="ri-pause-mini-line cursor-pointer text-3xl"
+              onClick={handlePlay}
+            />
+          ) : (
+            <i
+              className="ri-play-fill cursor-pointer text-3xl"
+              onClick={handlePlay}
+            />
+          )}
           <i
-            className="ri-play-fill cursor-pointer text-xl"
-            onClick={handlePlay}
+            className="ri-speed-mini-fill cursor-pointer text-2xl"
+            onClick={next}
           />
-        )}
-        <i
-          className="ri-speed-mini-fill cursor-pointer text-xl"
-          onClick={next}
-        />
+        </div>
+        <div className="min-w-[100px] max-w-[100px]" />
       </div>
-      <div className="sliderContainer">
+      {/* <div className="sliderContainer flex items-center justify-center gap-x-2">
         {VolumeBtns()}
         <input
           type="range"
@@ -160,7 +183,7 @@ export const Player = ({
           onChange={(e) => handleVolume(e)}
           className="rangeSlider"
         />
-      </div>
+      </div> */}
     </div>
   )
 }
