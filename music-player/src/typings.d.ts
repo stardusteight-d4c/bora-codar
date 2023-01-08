@@ -22,3 +22,24 @@ interface PlayerProps {
   mute: boolean
   setMute: React.Dispatch<React.SetStateAction<boolean>>
 }
+
+interface ProgressBarProps {
+  currentSong: CurrentSong
+  progressBarElementRef: any
+  audioElementRef: any
+  progress: number
+}
+
+interface ControlsProps {
+  songs: Musics[]
+  currentSong: CurrentSong
+  setCurrentSong: React.Dispatch<React.SetStateAction<CurrentSong>>
+  setProgress: React.Dispatch<React.SetStateAction<number>>
+  audioElementRef: any
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>
+  isPlaying: boolean
+  volume: number
+  setVolume: React.Dispatch<React.SetStateAction<number>>
+  mute: boolean
+  setMute: React.Dispatch<React.SetStateAction<boolean>>
+}

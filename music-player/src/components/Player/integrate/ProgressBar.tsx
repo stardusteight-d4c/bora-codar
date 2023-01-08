@@ -1,19 +1,12 @@
 import React from 'react'
 
-interface Props {
-  currentSong: any
-  progressBarElementRef: any
-  audioElementRef: any
-  progress: any
-}
-
 export const ProgressBar = ({
   currentSong,
   progressBarElementRef,
   audioElementRef,
   progress,
-}: Props) => {
-  const checkWidth = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+}: ProgressBarProps) => {
+  const handleProgress = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const width = progressBarElementRef.current.clientWidth
     const offset = e.nativeEvent.offsetX
     const progress = (offset / width) * 100
@@ -21,7 +14,7 @@ export const ProgressBar = ({
       (progress / 100) * currentSong.duration!
   }
 
-  function formatTime(time: any) {
+  const formatTime = (time: number) => {
     if (time && !isNaN(time)) {
       const minutes =
         Math.floor(time / 60) < 10
@@ -38,21 +31,28 @@ export const ProgressBar = ({
   }
 
   return (
-    <div className="w-full cursor-pointer mt-4">
-      <div className="flex items-center justify-between">
-        <span>{formatTime(currentSong.currentTime)}</span>
-        <span>{formatTime(currentSong.duration)}</span>
+    <div className={style.wrapper}>
+      <div className={style.flexCenter}>
+        <span>{formatTime(currentSong.currentTime!)}</span>
+        <span>{formatTime(currentSong.duration!)}</span>
       </div>
       <div
-        className="w-full bg-white/30 shadow-inner shadow-black/10 h-2 overflow-hidden rounded-full"
-        onClick={(e) => checkWidth(e)}
+        className={style.progressBar}
+        onClick={(e) => handleProgress(e)}
         ref={progressBarElementRef}
       >
         <div
           style={{ width: `${progress + '%'}` }}
-          className="bg-white h-2 rounded-full"
+          className={style.progress}
         />
       </div>
     </div>
   )
+}
+
+const style = {
+  wrapper: `w-full cursor-pointer mt-4`,
+  flexCenter: `flex items-center justify-between`,
+  progressBar: `w-full bg-white/30 shadow-inner shadow-black/10 h-2 overflow-hidden rounded-full`,
+  progress: `bg-white h-2 rounded-full`,
 }

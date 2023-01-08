@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Controls } from '../integrate/Controls'
-import { ProgressBar } from '../integrate/ProgressBar'
+import { useEffect, useRef, useState } from 'react'
+import { Controls } from './integrate/Controls'
+import { ProgressBar } from './integrate/ProgressBar'
 
 export const Player = ({
   songs,
@@ -13,12 +13,33 @@ export const Player = ({
   setMute,
 }: PlayerProps) => {
   const progressBarElementRef = useRef<any>()
-  const [volume, setVolume] = useState<any>(50)
-  const [progress, setProgress] = useState(currentSong.progress)
+  const [volume, setVolume] = useState<number>(50)
+  const [progress, setProgress] = useState<number>(currentSong.progress!)
 
   useEffect(() => {
-    setProgress(currentSong.progress)
+    setProgress(currentSong.progress!)
   }, [currentSong.progress])
+
+  const progressBarProps: ProgressBarProps = {
+    currentSong,
+    progressBarElementRef,
+    audioElementRef,
+    progress,
+  }
+
+  const controlsProps: ControlsProps = {
+    songs,
+    currentSong,
+    setCurrentSong,
+    setProgress,
+    audioElementRef,
+    setIsPlaying,
+    isPlaying,
+    volume,
+    setVolume,
+    mute,
+    setMute,
+  }
 
   return (
     <div className={style.wrapper}>
@@ -29,27 +50,8 @@ export const Player = ({
           <span className={style.artist}>{currentSong.artist}</span>
         </div>
       </div>
-
-      <ProgressBar
-        currentSong={currentSong}
-        progressBarElementRef={progressBarElementRef}
-        audioElementRef={audioElementRef}
-        progress={progress}
-      />
-
-      <Controls
-        songs={songs}
-        currentSong={currentSong}
-        setCurrentSong={setCurrentSong}
-        setProgress={setProgress}
-        audioElementRef={audioElementRef}
-        setIsPlaying={setIsPlaying}
-        isPlaying={isPlaying}
-        volume={volume}
-        setVolume={setVolume}
-        mute={mute}
-        setMute={setMute}
-      />
+      <ProgressBar {...progressBarProps} />
+      <Controls {...controlsProps} />
     </div>
   )
 }

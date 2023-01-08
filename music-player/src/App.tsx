@@ -37,6 +37,7 @@ export const App = (props: Props) => {
     onTimeUpdate: onPlaying,
     muted: mute,
   }
+  
   const playerProps: PlayerProps = {
     songs,
     setSongs,
@@ -63,6 +64,6 @@ export const App = (props: Props) => {
 }
 
 const style = {
-  wrapper: `flex items-center bg-[#181818] justify-center min-h-screen`,
+  wrapper: `flex items-center bg-[#121214] justify-center min-h-screen`,
   splineContainer: `hidden md:block absolute inset-0`,
 }
