@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { songs as songsData } from './assets/musics'
 import { Player } from './components/Player'
-import Spline from '@splinetool/react-spline';
+import Spline from '@splinetool/react-spline'
 
 interface Props {}
 
@@ -35,8 +35,11 @@ export const App = (props: Props) => {
   //settar font-family
 
   return (
-    <div className="flex items-center bg-[#19171a] justify-center min-h-screen">
-    <Spline className='absolute inset-0' scene="https://prod.spline.design/Aa3b9x0vwDxHyf-v/scene.splinecode" />
+    <div className="flex items-center bg-[#181818] justify-center min-h-screen">
+      <Spline
+        className="absolute inset-0"
+        scene="https://prod.spline.design/Aa3b9x0vwDxHyf-v/scene.splinecode"
+      />
       <audio
         src={currentSong.url}
         ref={audioElementRef}

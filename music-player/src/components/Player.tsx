@@ -87,29 +87,27 @@ export const Player = ({
     return '00:00'
   }
 
-  const rangeSlider: React.CSSProperties = {}
-
   function VolumeBtns() {
     return mute ? (
       <i
         className="ri-volume-mute-fill text-white/80 hover:text-white cursor-pointer"
         onClick={() => setMute(!mute)}
       />
-    ) : volume <= 65 ? (
+    ) : volume <= 50 ? (
       <i
         className="ri-volume-down-fill text-white/80 hover:text-white cursor-pointer"
         onClick={() => setMute(!mute)}
       />
     ) : (
       <i
-        className="ri-volume-up-fill text-white/80 hover:text-white cursor-pointer"
+        className='ri-volume-up-fill text-white/80 hover:text-white cursor-pointer'
         onClick={() => setMute(!mute)}
       />
     )
   }
 
   return (
-    <div className="player  min-w-[490px] max-w-[490px] p-[38px] rounded-[10px] text-white flex flex-col items-center justify-center h-fit">
+    <div className="player  min-w-[490px] max-w-[490px] p-[38px] rounded-md text-white flex flex-col items-center justify-center h-fit">
       <div className="flex items-center justify-center w-full">
         <img
           src={currentSong?.cover}
@@ -150,7 +148,7 @@ export const Player = ({
             />
           </div>
         </div>
-        <div className='flex items-center justify-center gap-x-4'>
+        <div className="flex items-center justify-center gap-x-4">
           <i
             className="ri-rewind-mini-fill cursor-pointer text-2xl"
             onClick={back}
@@ -171,19 +169,8 @@ export const Player = ({
             onClick={next}
           />
         </div>
-        <div className="min-w-[100px] max-w-[100px]" />
+        <div className="min-w-[60px] max-w-[60px]" />
       </div>
-      {/* <div className="sliderContainer flex items-center justify-center gap-x-2">
-        {VolumeBtns()}
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={volume}
-          onChange={(e) => handleVolume(e)}
-          className="rangeSlider"
-        />
-      </div> */}
     </div>
   )
 }
