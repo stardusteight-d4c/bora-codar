@@ -9,6 +9,7 @@ export const App = (props: Props) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentSong, setCurrentSong] = useState<any>(songsData[0])
   const audioElementRef = useRef<any>()
+  const [mute, setMute] = useState<boolean>(false)
 
   useEffect(() => {
     if (isPlaying) {
@@ -36,6 +37,7 @@ export const App = (props: Props) => {
         src={currentSong.url}
         ref={audioElementRef}
         onTimeUpdate={onPlaying}
+         muted={mute}
       />
       <Player
         songs={songs}
@@ -45,6 +47,8 @@ export const App = (props: Props) => {
         currentSong={currentSong}
         setCurrentSong={setCurrentSong}
         audioElementRef={audioElementRef}
+        mute={mute} 
+        setMute={setMute}
       />
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface Props {
   songs: any
@@ -8,6 +8,8 @@ interface Props {
   currentSong: any
   setCurrentSong: any
   audioElementRef: any
+  mute: any
+  setMute: any
 }
 
 export const Player = ({
@@ -18,11 +20,23 @@ export const Player = ({
   currentSong,
   setCurrentSong,
   audioElementRef,
+  mute,
+  setMute,
 }: Props) => {
   const progressBarElementRef = useRef<any>()
+  const [volume, setVolume] = useState<any>(50)
 
   const handlePlay = () => {
     setIsPlaying(!isPlaying)
+  }
+
+  const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVolume(e.target.value)
+    console.log(volume)
+
+    if (audioElementRef) {
+      audioElementRef.current.volume = volume / 100
+    }
   }
 
   const checkWidth = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -73,7 +87,26 @@ export const Player = ({
     return '00:00'
   }
 
-  // adicionar volume
+  const rangeSlider: React.CSSProperties = {}
+
+  function VolumeBtns() {
+    return mute ? (
+      <i
+        className="ri-volume-mute-fill text-white/80 hover:text-white cursor-pointer"
+        onClick={() => setMute(!mute)}
+      />
+    ) : volume <= 65 ? (
+      <i
+        className="ri-volume-down-fill text-white/80 hover:text-white cursor-pointer"
+        onClick={() => setMute(!mute)}
+      />
+    ) : (
+      <i
+        className="ri-volume-up-fill text-white/80 hover:text-white cursor-pointer"
+        onClick={() => setMute(!mute)}
+      />
+    )
+  }
 
   return (
     <div className="w-[500px] p-2 text-white flex flex-col items-center justify-center bg-gray-700 h-fit">
@@ -115,6 +148,17 @@ export const Player = ({
         <i
           className="ri-speed-mini-fill cursor-pointer text-xl"
           onClick={next}
+        />
+      </div>
+      <div className="sliderContainer">
+        {VolumeBtns()}
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={volume}
+          onChange={(e) => handleVolume(e)}
+          className="rangeSlider"
         />
       </div>
     </div>
