@@ -17,7 +17,7 @@ interface PlayerProps {
   isPlaying: boolean
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>
   currentSong: CurrentSong
-  setCurrentSong: React.Dispatch<React.SetStateAction<CurrentSong>>
+  setCurrentSong: React.Dispatch<React.SetStateAction<CurrentSong | undefined>>
   audioElementRef: any
   mute: boolean
   setMute: React.Dispatch<React.SetStateAction<boolean>>
@@ -33,7 +33,7 @@ interface ProgressBarProps {
 interface ControlsProps {
   songs: Musics[]
   currentSong: CurrentSong
-  setCurrentSong: React.Dispatch<React.SetStateAction<CurrentSong>>
+  setCurrentSong: React.Dispatch<React.SetStateAction<CurrentSong | undefined>>
   setProgress: React.Dispatch<React.SetStateAction<number>>
   audioElementRef: any
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>

@@ -1,16 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { musics as musicsData } from './assets/mockData'
 import { Player } from './components/Player/Player'
 import Spline from '@splinetool/react-spline'
 
 interface Props {}
 
 export const App = (props: Props) => {
-  const [songs, setSongs] = useState<Music[]>(musicsData)
+  const [songs, setSongs] = useState<Music[]>([])
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const [currentSong, setCurrentSong] = useState<CurrentSong>(musicsData[0])
+  const [currentSong, setCurrentSong] = useState<CurrentSong>()
   const audioElementRef: any = useRef<React.ClassAttributes<HTMLAudioElement>>()
   const [mute, setMute] = useState<boolean>(false)
+
+  useEffect(() => {
+    ;(async () => {
+      await fetch('/musics.json')
+        .then((res) => res.json())
+        .then((data: Music[]) => {
+          setSongs(data)
+          setCurrentSong(data[0])
+        })
+        .catch((error) => console.log(error))
+    })()
+  }, [])
 
   useEffect(() => {
     if (isPlaying) {
@@ -19,6 +30,10 @@ export const App = (props: Props) => {
       audioElementRef.current?.pause()
     }
   }, [isPlaying])
+
+  if (currentSong === null || currentSong === undefined) {
+    return <></>
+  }
 
   const onPlaying = () => {
     const duration = audioElementRef.current.duration
@@ -37,7 +52,7 @@ export const App = (props: Props) => {
     onTimeUpdate: onPlaying,
     muted: mute,
   }
-  
+
   const playerProps: PlayerProps = {
     songs,
     setSongs,
