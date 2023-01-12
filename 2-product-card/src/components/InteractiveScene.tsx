@@ -2,22 +2,18 @@ import { Circle, OrbitControls, Stats } from '@react-three/drei'
 import { Canvas, useLoader } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { StaticScene } from './StaticScene'
 
 interface Props {
   pathScene: string
-  zoom?: number
 }
 
-export function InteractiveScene({ pathScene, zoom }: Props) {
+export function InteractiveScene({ pathScene }: Props) {
   const gltf = useLoader(GLTFLoader, pathScene)
-
-  const zoomCamera = zoom ? zoom : 100
 
   return (
     <Suspense fallback={'Loading...'}>
       <Canvas
-        camera={{ position: [-50, 60, zoomCamera ], zoom: 0.7 }}
+        camera={{ position: [-50, 60, 100], zoom: 0.7 }}
         style={{ width: '600px', height: '600px' }}
       >
         <primitive object={gltf.scene} position={[0, 0, 0]} />

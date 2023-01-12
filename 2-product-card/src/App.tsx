@@ -1,57 +1,88 @@
 import styled from 'styled-components'
 import { Showcase } from './components/Showcase'
 import { Info } from './components/Info'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function App() {
   const [products, setProducts] = useState<Product[]>()
   const [activeProduct, setActiveProduct] = useState<number>(0)
+  const [interactive360Mode, setInteractive360Mode] = useState<boolean>(false)
+  const [bgColor, setBgColor] = useState<string>('#c2aef3')
 
-  fetch('./fakeApiProducts/products.json')
-    .then((res) => res.json())
-    .then((data) => setProducts(data))
+  useEffect(() => {
+    ;(async () => {
+      await fetch('./fakeApiProducts/products.json')
+        .then((res) => res.json())
+        .then((data) => setProducts(data))
+    })()
+  }, [])
 
   if (!products) {
     return <>Loading...</>
   }
 
-  const dotProps = (index: number, activeItem: boolean) => {
+  const dotProps = (index: number, color: string, activeItem: boolean) => {
     return {
-      onClick: () => setActiveProduct(index),
+      onClick: () => {
+        setActiveProduct(index)
+        setInteractive360Mode(false)
+        setBgColor(color)
+      },
       style: activeItem
         ? { backgroundColor: '#FFFFFF' }
         : { backgroundColor: '#00000050' },
     }
   }
 
+  const mainProps = {
+    showCase: {
+      pathScene: products[activeProduct].pathScene,
+      interactive360Mode: interactive360Mode,
+      setInteractive360Mode: setInteractive360Mode,
+    },
+    info: {
+      product: products[activeProduct],
+    },
+  }
+
   return (
-    <Wrapper>
+    <Wrapper bgColor={bgColor}>
       <Main>
-        <Showcase
-          pathScene={products[activeProduct].pathScene}
-          zoom={products[activeProduct]?.zoom}
-        />
-        <Info product={products[activeProduct]} />
+        <Showcase {...mainProps.showCase} />
+        <Info {...mainProps.info} />
         <Dots>
-          <div {...dotProps(0, activeProduct === 0)} />
-          <div {...dotProps(1, activeProduct === 1)} />
-          <div {...dotProps(2, activeProduct === 2)} />
+          {products.map((_, index) => {
+            const color = ['#dec1ba', '#c8b49e']
+            return (
+              <div
+                {...dotProps(index, color[index], activeProduct === index)}
+                key={index}
+              />
+            )
+          })}
         </Dots>
       </Main>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.div`
+interface StyledProps {
+  bgColor: string
+}
+
+const Wrapper = styled.div<StyledProps>`
   display: flex;
+  width: 100vw;
+  background-color: ${(props) => props.bgColor};
+  height: 100vh;
   justify-items: center;
   justify-content: center;
 `
-
-const Main = styled.div`
+const Main = styled.main`
   display: grid;
   width: 100vw;
-  height: fit-content;
+  max-height: fit-content;
+  margin-block: auto;
   column-gap: 30px;
   position: relative;
   grid-template-columns: repeat(2, minmax(0, 1fr));

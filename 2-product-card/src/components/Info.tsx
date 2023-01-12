@@ -24,7 +24,7 @@ const ProductInfo = styled.section`
   display: flex;
   justify-items: center;
   justify-content: start;
-  margin-top: -60px;
+  margin-top: -75px;
   div {
     height: fit-content;
     margin-block: auto;
@@ -40,6 +40,7 @@ const ProductInfo = styled.section`
     font-family: 'Crimson Pro', serif;
     font-weight: 600;
     font-size: 2.8rem;
+    width: 400px;
     margin-block: 12px;
     color: #271a45;
   }

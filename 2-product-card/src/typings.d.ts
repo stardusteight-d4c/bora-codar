@@ -3,5 +3,4 @@ interface Product {
   code: string
   name: string
   price: string
-  zoom?: number
 }

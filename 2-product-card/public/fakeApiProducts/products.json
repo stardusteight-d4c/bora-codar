@@ -10,12 +10,5 @@
     "code": "76854",
     "name": "Lars Accent Chair, Diego Grey",
     "price": "5.500"
-  },
-  {
-    "pathScene": "./scenes/hallie-sofa-bed/scene.gltf",
-    "code": "48932",
-    "name": "Hallie Sofa Bed, Aegean Blue with Copper Legs",
-    "price": "2.600",
-    "zoom": 145
   }
 ]
