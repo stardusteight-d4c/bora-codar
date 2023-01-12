@@ -8,9 +8,10 @@ import closeIcon from '../assets/closeIcon.svg'
 
 interface Props {
   pathScene: string
+  zoom: number | undefined
 }
 
-export function Showcase({ pathScene }: Props) {
+export function Showcase({ pathScene, zoom }: Props) {
   const [interactive360Mode, setInteractive360Mode] = useState<boolean>(false)
 
   return (
@@ -32,11 +33,11 @@ export function Showcase({ pathScene }: Props) {
         <div className="model360DContainer">
           {interactive360Mode ? (
             <Suspense fallback={'Loading...'}>
-              <InteractiveScene pathScene={pathScene} />
+              <InteractiveScene pathScene={pathScene} zoom={zoom} />
             </Suspense>
           ) : (
             <Suspense fallback={'Loading...'}>
-              <StaticScene pathScene={pathScene} />
+              <StaticScene pathScene={pathScene} zoom={zoom} />
             </Suspense>
           )}
         </div>

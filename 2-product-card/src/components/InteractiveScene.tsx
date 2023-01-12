@@ -6,15 +6,18 @@ import { StaticScene } from './StaticScene'
 
 interface Props {
   pathScene: string
+  zoom?: number
 }
 
-export function InteractiveScene({ pathScene }: Props) {
+export function InteractiveScene({ pathScene, zoom }: Props) {
   const gltf = useLoader(GLTFLoader, pathScene)
+
+  const zoomCamera = zoom ? zoom : 100
 
   return (
     <Suspense fallback={'Loading...'}>
       <Canvas
-        camera={{ position: [-50, 60, 100], zoom: 0.7 }}
+        camera={{ position: [-50, 60, zoomCamera ], zoom: 0.7 }}
         style={{ width: '600px', height: '600px' }}
       >
         <primitive object={gltf.scene} position={[0, 0, 0]} />

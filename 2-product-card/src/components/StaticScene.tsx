@@ -4,15 +4,18 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 interface Props {
   pathScene: string
+  zoom?: number
 }
 
-export function StaticScene({ pathScene }: Props) {
+export function StaticScene({ pathScene, zoom }: Props) {
   const gltf = useLoader(GLTFLoader, pathScene)
+
+  const zoomCamera = zoom ? zoom : 100
 
   return (
     <Suspense fallback={'Loading...'}>
       <Canvas
-        camera={{ position: [-50, 60, 100], zoom: 0.7 }}
+        camera={{ position: [-50, 60, zoomCamera], zoom: 0.7 }}
         style={{ width: '600px', height: '600px' }}
       >
         <primitive object={gltf.scene} position={[0, 0, 0]} />
