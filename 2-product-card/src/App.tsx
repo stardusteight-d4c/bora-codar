@@ -75,8 +75,8 @@ const Wrapper = styled.div<StyledProps>`
   padding: 0px;
   text-align: start;
   max-width: 100vw;
+  height: 100vh;
   padding: 8px;
-  min-height: 100vh;
   background-color: ${(props) => props.bgColor};
   justify-items: center;
   justify-content: center;
