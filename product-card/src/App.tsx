@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Showcase } from './components/Showcase'
 import { Info } from './components/Info'
+import { Suspense } from 'react'
+import { Scene } from './components/Scene'
 
 export function App() {
   return (
@@ -14,8 +16,6 @@ export function App() {
 }
 
 const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-items: center;
   justify-content: center;
@@ -23,7 +23,8 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   display: grid;
-  margin-block: auto;
+  width: 100vw;
+  /* height: 100vh; */
   column-gap: 150px;
   height: 60vh;
   grid-template-columns: repeat(2, minmax(0, 1fr));
