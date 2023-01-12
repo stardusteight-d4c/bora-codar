@@ -72,11 +72,10 @@ interface StyledProps {
 
 const Wrapper = styled.div<StyledProps>`
   display: flex;
-  padding: 0px;
   text-align: start;
   max-width: 100vw;
   height: 100vh;
-  padding: 8px;
+  overflow: hidden;
   background-color: ${(props) => props.bgColor};
   justify-items: center;
   justify-content: center;
