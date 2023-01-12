@@ -1,0 +1,14 @@
+[
+  {
+    "pathScene": "./scenes/sofa-margot/scene.gltf",
+    "code": "42404",
+    "name": "Sofá Margot II - Rosé",
+    "price": "4.000"
+  },
+  {
+    "pathScene": "./scenes/lars-accent-chair/scene.gltf",
+    "code": "76854",
+    "name": "Lars Accent Chair, Diego Grey",
+    "price": "5.500"
+  }
+]

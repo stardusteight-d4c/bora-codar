@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 
-export function Info() {
+interface Props {
+  product: Product
+}
+
+export function Info({ product }: Props) {
   return (
     <ProductInfo>
       <div>
-        <span className="code">Código: 42404</span>
-        <h1 className="title">Sofá Margot II - Rosé</h1>
-        <span className="price">R$ 4.000</span>
+        <span className="code">Código: {product.code}</span>
+        <h1 className="title">{product.name}</h1>
+        <span className="price">R$ {product.price}</span>
         <button type="button" className="button">
           Adicionar à cesta
         </button>
@@ -20,6 +24,7 @@ const ProductInfo = styled.section`
   display: flex;
   justify-items: center;
   justify-content: start;
+  margin-top: -60px;
   div {
     height: fit-content;
     margin-block: auto;
@@ -27,23 +32,24 @@ const ProductInfo = styled.section`
   .code {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 0.625rem;
+    font-size: 0.825rem;
     color: #271a45;
     text-transform: uppercase;
   }
   .title {
     font-family: 'Crimson Pro', serif;
     font-weight: 600;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-block: 12px;
     color: #271a45;
   }
   .price {
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #271a45;
+    opacity: 0.9;
     display: inline-block;
-    margin-bottom: 28px;
+    margin-bottom: 25px;
   }
   .button {
     display: flex;
@@ -58,5 +64,11 @@ const ProductInfo = styled.section`
     font-family: 'Lato', sans-serif;
     color: #271a45;
     cursor: pointer;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 400ms;
+    :hover {
+      transform: scale(1.1);
+    }
   }
 `

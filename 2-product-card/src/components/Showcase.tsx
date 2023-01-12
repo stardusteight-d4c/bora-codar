@@ -1,31 +1,42 @@
 import styled from 'styled-components'
-import Icon360 from '../assets/icon360.svg'
-import React, { Suspense, useState } from 'react'
+import { Suspense, useState } from 'react'
 import { InteractiveScene } from './InteractiveScene'
 import { StaticScene } from './StaticScene'
 
-export function Showcase() {
-  const [show360model, setShow360model] = useState<boolean>(false)
-  const [enableOrbitControls, setEnableOrbitControls] = useState<boolean>(false)
+import icon360 from '../assets/icon360.svg'
+import closeIcon from '../assets/closeIcon.svg'
+
+interface Props {
+  pathScene: string
+}
+
+export function Showcase({ pathScene }: Props) {
+  const [interactive360Mode, setInteractive360Mode] = useState<boolean>(false)
 
   return (
     <ProductShowcase>
       <div>
-        <img
-          onClick={() => {
-            setShow360model(!show360model)
-          }}
-          src={Icon360}
-          className="icon360"
-        />
-        <div className='model360DContainer'>
-          {!show360model ? (
-            <Suspense fallback={'...'}>
-              <InteractiveScene />
+        {interactive360Mode ? (
+          <img
+            onClick={() => setInteractive360Mode(!interactive360Mode)}
+            src={closeIcon}
+            className="closeIcon"
+          />
+        ) : (
+          <img
+            onClick={() => setInteractive360Mode(!interactive360Mode)}
+            src={icon360}
+            className="icon360"
+          />
+        )}
+        <div className="model360DContainer">
+          {interactive360Mode ? (
+            <Suspense fallback={'Loading...'}>
+              <InteractiveScene pathScene={pathScene} />
             </Suspense>
           ) : (
-            <Suspense fallback={'...'}>
-              <StaticScene />
+            <Suspense fallback={'Loading...'}>
+              <StaticScene pathScene={pathScene} />
             </Suspense>
           )}
         </div>
@@ -42,15 +53,21 @@ const ProductShowcase = styled.section`
     position: relative;
     .icon360 {
       position: absolute;
-      right: -35px;
-      top: 0px;
+      right: 35px;
+      top: 120px;
+      z-index: 10;
       width: 45px;
       padding: 2px;
       cursor: pointer;
-      :hover {
-        transform: scale(1.2);
-        transition: transform 0.5s ease-out;
-      }
+    }
+    .closeIcon {
+      position: absolute;
+      right: 43px;
+      top: 120px;
+      z-index: 10;
+      width: 28px;
+      padding: 2px;
+      cursor: pointer;
     }
     .model360DContainer {
       margin-top: 80px;

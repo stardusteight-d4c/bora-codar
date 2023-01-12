@@ -2,13 +2,17 @@ import { Canvas, useLoader } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
-export function StaticScene() {
-  const gltf = useLoader(GLTFLoader, './scene/scene.gltf')
+interface Props {
+  pathScene: string
+}
+
+export function StaticScene({ pathScene }: Props) {
+  const gltf = useLoader(GLTFLoader, pathScene)
 
   return (
-    <Suspense fallback={'...'}>
+    <Suspense fallback={'Loading...'}>
       <Canvas
-        camera={{ position: [50, 60, 100], zoom: 0.7 }}
+        camera={{ position: [-50, 60, 100], zoom: 0.7 }}
         style={{ width: '600px', height: '600px' }}
       >
         <primitive object={gltf.scene} position={[0, 0, 0]} />
