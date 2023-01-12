@@ -49,6 +49,7 @@ export function Showcase({
   )
 }
 const ProductShowcase = styled.section`
+  margin-right: 0px;
   display: flex;
   justify-items: center;
   justify-content: end;

@@ -52,7 +52,7 @@ export function App() {
         <Info {...mainProps.info} />
         <Dots>
           {products.map((_, index) => {
-            const color = ['#dec1ba', '#c8b49e']
+            const color = ['#c2aef3', '#c8b49e']
             return (
               <div
                 {...dotProps(index, color[index], activeProduct === index)}
@@ -72,17 +72,20 @@ interface StyledProps {
 
 const Wrapper = styled.div<StyledProps>`
   display: flex;
-  width: 100vw;
+  padding: 0px;
+  text-align: start;
+  max-width: 100vw;
+  padding: 8px;
+  min-height: 100vh;
   background-color: ${(props) => props.bgColor};
-  height: 100vh;
   justify-items: center;
   justify-content: center;
 `
 const Main = styled.main`
   display: grid;
-  width: 100vw;
-  max-height: fit-content;
   margin-block: auto;
+  max-height: fit-content;
+  width: 100vw;
   column-gap: 30px;
   position: relative;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -91,9 +94,9 @@ const Main = styled.main`
   }
 `
 const Dots = styled.div`
+  left: 50%;
   position: absolute;
   bottom: 180px;
-  left: 50%;
   transform: translateX(-50%);
   display: flex;
   column-gap: 10px;

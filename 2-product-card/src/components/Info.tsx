@@ -20,11 +20,11 @@ export function Info({ product }: Props) {
 }
 
 const ProductInfo = styled.section`
+  margin-top: -75px;
   width: 100%;
   display: flex;
   justify-items: center;
   justify-content: start;
-  margin-top: -75px;
   div {
     height: fit-content;
     margin-block: auto;
