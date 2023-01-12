@@ -1,31 +1,28 @@
-import {
-  Circle,
-  Lightformer,
-  OrbitControls,
-  ScrollControls,
-  Stats,
-} from '@react-three/drei'
+import { Circle, OrbitControls, Stats } from '@react-three/drei'
 import { Canvas, useLoader } from '@react-three/fiber'
 import { Suspense } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
-export function Scene() {
+export function InteractiveScene() {
   const gltf = useLoader(GLTFLoader, './scene/scene.gltf')
 
   return (
     <Suspense fallback={'...'}>
       <Canvas
         camera={{ position: [50, 60, 100], zoom: 0.7 }}
-        style={{ width: '600px', height: '600px' }}
+        style={{ width: '600px', height: '600px',  }}
       >
         <primitive object={gltf.scene} position={[0, 0, 0]} />
-        <directionalLight position={[3.3, 1.0, 4.4]} castShadow />
-        <directionalLight position={[-3.3, -1.0, -4.4]} castShadow />
+        <directionalLight position={[3.3, 1.0, 4.4]} />
+        <directionalLight position={[80, -180, -80]} />
+        <directionalLight position={[-45, 180, 80]} />
+        <directionalLight position={[-3.3, -1.0, -4.4]} />
 
-        <Circle args={[10]} rotation-x={-Math.PI / 2} receiveShadow>
+        {/* <Circle args={[10]} rotation-x={-Math.PI / 2} receiveShadow>
           <meshStandardMaterial />
-        </Circle>
+          </Circle>
         <Stats />
+        <axesHelper args={[100]} /> */}
 
         <OrbitControls
           target={[0, 0, 0]}
@@ -33,7 +30,6 @@ export function Scene() {
           autoRotate
           enableZoom={false}
         />
-        <axesHelper args={[100]} />
       </Canvas>
     </Suspense>
   )

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Icon360 from '../assets/icon360.svg'
 import React, { Suspense, useState } from 'react'
-import { Scene } from './Scene'
+import { InteractiveScene } from './InteractiveScene'
 import { StaticScene } from './StaticScene'
 
 export function Showcase() {
@@ -18,15 +18,17 @@ export function Showcase() {
           src={Icon360}
           className="icon360"
         />
-        {!show360model ? (
-          <Suspense fallback={'...'}>
-            <Scene />
-          </Suspense>
-        ) : (
-          <Suspense fallback={'...'}>
-            <StaticScene />
-          </Suspense>
-        )}
+        <div className='model360DContainer'>
+          {!show360model ? (
+            <Suspense fallback={'...'}>
+              <InteractiveScene />
+            </Suspense>
+          ) : (
+            <Suspense fallback={'...'}>
+              <StaticScene />
+            </Suspense>
+          )}
+        </div>
       </div>
     </ProductShowcase>
   )
@@ -41,7 +43,7 @@ const ProductShowcase = styled.section`
     .icon360 {
       position: absolute;
       right: -35px;
-      top: -50px;
+      top: 0px;
       width: 45px;
       padding: 2px;
       cursor: pointer;
@@ -49,6 +51,9 @@ const ProductShowcase = styled.section`
         transform: scale(1.2);
         transition: transform 0.5s ease-out;
       }
+    }
+    .model360DContainer {
+      margin-top: 80px;
     }
   }
 `
