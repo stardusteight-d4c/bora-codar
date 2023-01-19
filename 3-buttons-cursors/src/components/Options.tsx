@@ -8,18 +8,23 @@ interface Props {
 
 export const Options = ({ setOption, setOpenOptions, options }: Props) => {
   return (
-    <div className="w-auto absolute border border-white/20 bg-[#29292e] flex flex-col overflow-hidden rounded-md">
+    <div className={style.wrapper}>
       {options.map((option) => (
         <span
           onClick={() => {
             setOption(option)
             setOpenOptions(false)
           }}
-          className="capitalize px-4 py-[2px] cursor-pointer bg-[#29292e] hover:bg-white/10"
+          className={style.span}
         >
           {option}
         </span>
       ))}
     </div>
   )
+}
+
+const style = {
+  wrapper: `w-auto absolute border border-white/20 bg-[#29292e] flex flex-col overflow-hidden rounded-md`,
+  span: `capitalize px-4 py-[2px] cursor-pointer bg-[#29292e] hover:bg-white/10`,
 }

@@ -10,7 +10,7 @@ interface Props {
   setOpenVariantsOptions: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Showcase = ({
+export const InteractiveButtonShowcase = ({
   openCategoriesOptions,
   openVariantsOptions,
   setOpenCategoriesOptions,
@@ -31,7 +31,7 @@ export const Showcase = ({
   const variants = ['primary', 'secondary', 'tertiary']
 
   return (
-    <div className='flex items-center flex-col my-auto'>
+    <div className={style.wrapper}>
       <Button
         type="button"
         title={`${category} ${variant}`}
@@ -39,8 +39,8 @@ export const Showcase = ({
         variant={variant}
       />
 
-      <div className="flex items-center gap-x-4 p-14">
-        <div className="ralative max-w-fit flex flex-col items-center space-y-10">
+      <div className={style.flexWrapper}>
+        <div className={style.flexContainer}>
           <TriggerOptionsButton
             setOpenOptions={setOpenCategoriesOptions}
             openOptions={openCategoriesOptions}
@@ -55,7 +55,7 @@ export const Showcase = ({
           )}
         </div>
 
-        <div className="ralative flex flex-col items-center space-y-10">
+        <div className={style.flexContainer}>
           <TriggerOptionsButton
             setOpenOptions={setOpenVariantsOptions}
             openOptions={openVariantsOptions}
@@ -72,4 +72,10 @@ export const Showcase = ({
       </div>
     </div>
   )
+}
+
+const style = {
+  wrapper: `flex items-center flex-col my-auto`,
+  flexWrapper: `flex items-center gap-x-4 p-14`,
+  flexContainer: `ralative max-w-fit flex flex-col items-center space-y-10`,
 }
