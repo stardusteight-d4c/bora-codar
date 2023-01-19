@@ -31,7 +31,7 @@ export const Button = ({
       {category === 'default' && variant === 'secondary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 bg-[#3C3748] border-2 border-transparent rounded-3xl text-sm font-medium text-center"
+          className="uppercase px-6 py-3 bg-[#1EA1F1]/20 border-2 border-transparent rounded-3xl text-sm font-medium text-center"
         >
           {title}
         </button>
@@ -49,7 +49,7 @@ export const Button = ({
       {category === 'hover' && variant === 'primary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 bg-[#9674E5] border-2 border-transparent rounded-3xl text-sm font-medium text-center"
+          className="uppercase px-6 py-3 bg-[#1EA1F1] border-2 border-transparent rounded-3xl text-sm font-medium text-center"
         >
           {title}
         </button>
@@ -57,7 +57,7 @@ export const Button = ({
       {category === 'hover' && variant === 'secondary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 bg-[#3C3748] brightness-150 border-2 border-transparent rounded-3xl text-sm font-medium text-center"
+          className="uppercase px-6 py-3 bg-[#1EA1F1]/20 border-2 border-transparent rounded-3xl text-sm font-medium text-center"
         >
           {title}
         </button>
@@ -75,7 +75,7 @@ export const Button = ({
       {category === 'focus' && variant === 'primary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 bg-[#1EA1F1] border-2 border-[#D9CDF7] rounded-3xl text-sm font-medium text-center"
+          className="uppercase px-6 py-3 bg-[#1EA1F1] border-2 border-white/80 rounded-3xl text-sm font-medium text-center"
         >
           {title}
         </button>
@@ -83,7 +83,7 @@ export const Button = ({
       {category === 'focus' && variant === 'secondary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 bg-[#3C3748] border-2 border-[#D9CDF7] rounded-3xl text-sm font-medium text-center"
+          className="uppercase px-6 py-3 bg-[#1EA1F1]/20 border-2 border-white/80 rounded-3xl text-sm font-medium text-center"
         >
           {title}
         </button>
@@ -91,7 +91,7 @@ export const Button = ({
       {category === 'focus' && variant === 'tertiary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 bg-transparent border-2 border-[#D9CDF7] rounded-3xl text-sm font-medium text-center"
+          className="uppercase px-6 py-3 bg-transparent border-2 border-white/80 rounded-3xl text-sm font-medium text-center"
         >
           {title}
         </button>
@@ -109,7 +109,7 @@ export const Button = ({
       {category === 'disabled' && variant === 'secondary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 bg-[#3C3748] opacity-[0.56] cursor-not-allowed rounded-3xl text-sm font-medium text-center"
+          className="uppercase px-6 py-3 bg-[#1EA1F1]/20 opacity-[0.56] cursor-not-allowed rounded-3xl text-sm font-medium text-center"
         >
           {title}
         </button>
@@ -129,16 +129,16 @@ export const Button = ({
           type={type}
           className="uppercase px-6 py-3 inline-flex items-center gap-x-2 bg-[#1EA1F1] rounded-3xl text-sm font-medium text-center cursor-wait"
         >
-          <img src={loading} className="uppercase animate-spin pointer-events-none" />
+          <img src={loading} className="w-5 animate-spin pointer-events-none" />
           {title}
         </button>
       )}
       {category === 'loading' && variant === 'secondary' && (
         <button
           type={type}
-          className="uppercase px-6 py-3 inline-flex items-center gap-x-2 bg-[#3C3748] rounded-3xl text-sm font-medium text-center cursor-wait"
+          className="uppercase px-6 py-3 inline-flex items-center gap-x-2 bg-[#1EA1F1]/20 rounded-3xl text-sm font-medium text-center cursor-wait"
         >
-          <img src={loading} className="uppercase animate-spin pointer-events-none" />
+          <img src={loading} className="w-5 animate-spin pointer-events-none" />
           {title}
         </button>
       )}
@@ -147,7 +147,7 @@ export const Button = ({
           type={type}
           className="uppercase px-6 py-3 inline-flex items-center gap-x-2 bg-transparent rounded-3xl text-sm font-medium text-center cursor-wait"
         >
-          <img src={loading} className="uppercase animate-spin pointer-events-none" />
+          <img src={loading} className="w-5 animate-spin pointer-events-none" />
           {title}
         </button>
       )}
@@ -167,7 +167,7 @@ export const Button = ({
         <button
           type={type}
           draggable="true"
-          className="uppercase px-6 py-3 inline-flex items-center gap-x-2 bg-[#3C3748] rounded-3xl text-sm font-medium text-center cursor-move"
+          className="uppercase px-6 py-3 inline-flex items-center gap-x-2 bg-[#1EA1F1]/20 rounded-3xl text-sm font-medium text-center cursor-move"
         >
           <img src={reorderThree} className="uppercase pointer-events-none" />
           {title}

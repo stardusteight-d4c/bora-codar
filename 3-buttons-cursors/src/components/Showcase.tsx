@@ -31,7 +31,7 @@ export const Showcase = ({
   const variants = ['primary', 'secondary', 'tertiary']
 
   return (
-    <div className='flex items-center flex-col'>
+    <div className='flex items-center flex-col my-auto'>
       <Button
         type="button"
         title={`${category} ${variant}`}
@@ -40,7 +40,7 @@ export const Showcase = ({
       />
 
       <div className="flex items-center gap-x-4 p-14">
-        <div className="ralative flex flex-col items-center space-y-10">
+        <div className="ralative max-w-fit flex flex-col items-center space-y-10">
           <TriggerOptionsButton
             setOpenOptions={setOpenCategoriesOptions}
             openOptions={openCategoriesOptions}

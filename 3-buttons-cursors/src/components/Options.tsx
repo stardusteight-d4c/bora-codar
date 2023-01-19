@@ -15,7 +15,7 @@ export const Options = ({ setOption, setOpenOptions, options }: Props) => {
             setOption(option)
             setOpenOptions(false)
           }}
-          className="px-1 capitalize py-[2px] cursor-pointer bg-[#29292e] hover:bg-opacity-50"
+          className="capitalize px-4 py-[2px] cursor-pointer bg-[#29292e] hover:bg-white/10"
         >
           {option}
         </span>
