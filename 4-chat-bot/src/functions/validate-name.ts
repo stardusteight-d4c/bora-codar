@@ -26,7 +26,7 @@ export function validateName(
       {
         bot: [
           {
-            message: `Okay! Seu nome ficará registrado na minha base de dados como: ${message}`,
+            message: `Seu nome ficará registrado na base de dados como: ${message}`,
             date: new Date(),
           },
           {
@@ -36,6 +36,6 @@ export function validateName(
         ],
       },
     ])
-    setStage('CONFIRM_NAME')
+    setStage('STAGE02-CONFIRM_NAME')
   }
 }
