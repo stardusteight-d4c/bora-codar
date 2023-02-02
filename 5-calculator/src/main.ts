@@ -1,23 +1,42 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
+import { buttonsProps } from './utils/buttonsProps'
 
-// document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="/vite.svg" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://www.typescriptlang.org/" target="_blank">
-//       <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-//     </a>
-//     <h1>Vite + TypeScript</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite and TypeScript logos to learn more
-//     </p>
-//   </div>
-// `
+const ELEMENTS_ID = {
+  app: 'app',
+  buttonsContainer: 'buttonsContainer',
+}
 
-// setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const rendersButtons = (buttonsContainer: HTMLButtonElement) => {
+  buttonsProps.map((button) => {
+    const prevState = buttonsContainer.innerHTML
+    buttonsContainer.innerHTML =
+      prevState +
+      `<button type="button" class="${button.styles} button col-span-1">${button.content}</button>`
+  })
+}
+
+document.querySelector<HTMLDivElement>(`#${ELEMENTS_ID.app}`)!.innerHTML = `
+  <div class="flex items-center justify-center h-screen overflow-hidden">
+    <main class="calculatorContainer">
+      <div class="flex flex-col pt-[54px] px-[54px] gap-y-2">
+        <div class="operation text-right !leading-[140%] text-[20px] text-[#6B6B6B]">
+          1 + 1
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-[#6B6B6B]">
+            <img src="/src/assets/equals.svg" />
+          </span>
+          <h2 class="result text-[36px] !leading-[140%]">0</h2>
+        </div>
+      </div>
+      <div
+        id=${ELEMENTS_ID.buttonsContainer}
+        class="pt-[26px] grid grid-cols-4 gap-3 grid-rows-5 px-8 pb-8 col-span-1"
+      >
+      </div>
+    </main>
+  </div>
+`
+rendersButtons(
+  document.querySelector<HTMLButtonElement>(`#${ELEMENTS_ID.buttonsContainer}`)!
+)
