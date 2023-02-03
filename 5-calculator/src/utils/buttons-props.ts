@@ -16,7 +16,7 @@ export const buttonsProps: {
     styles: 'blackButton',
     props: {
       'data-metadata': 'CANCEL_ENTRY',
-      style: 'color: #975DFA',
+      style: 'color: #975DFA;',
       value: 'CANCEL_ENTRY',
     },
   },

@@ -11,73 +11,76 @@ export function registerOperations(event: MouseEvent) {
   ) as HTMLHeadingElement
 
   const button = event.target as HTMLButtonElement
-  const buttonValue = button.getAttribute('value')!
+  const buttonValue = button.getAttribute('value')
   let prevState = operationElement.innerHTML
   const currentOperationValue = button.dataset.metadata!
 
-  console.log(button.dataset.metadata);
+  console.log(button)
 
+  if (buttonValue) {
+    if (Number(buttonValue) >= 0 || Number(buttonValue) <= 9) {
+      operationElement.innerHTML = prevState + buttonValue
+      operationState.push(buttonValue)
+    }
 
-  if (Number(buttonValue) >= 0 || Number(buttonValue) <= 9) {
-    operationElement.innerHTML = prevState + buttonValue
-    operationState.push(buttonValue)
-  }
+    if (
+      buttonValue === 'ADDITION' &&
+      !isNaN(Number(operationState[operationState.length - 1]))
+    ) {
+      operationElement.innerHTML = prevState + ' + '
+      operationState.push('ADDITION')
+    }
+    if (
+      buttonValue === 'SUBTRACTION' &&
+      !isNaN(Number(operationState[operationState.length - 1]))
+    ) {
+      operationElement.innerHTML = prevState + ' - '
+      operationState.push('SUBTRACTION')
+    }
 
-  if (
-    buttonValue === 'ADDITION' &&
-    !isNaN(Number(operationState[operationState.length - 1]))
-  ) {
-    operationElement.innerHTML = prevState + ' + '
-    operationState.push('ADDITION')
-  }
-  if (
-    buttonValue === 'SUBTRACTION' &&
-    !isNaN(Number(operationState[operationState.length - 1]))
-  ) {
-    operationElement.innerHTML = prevState + ' - '
-    operationState.push('SUBTRACTION')
-  }
+    if (
+      buttonValue === 'MULTIPLICATION' &&
+      !isNaN(Number(operationState[operationState.length - 1]))
+    ) {
+      operationElement.innerHTML = prevState + ' x '
+      operationState.push('MULTIPLICATION')
+    }
 
-  if (
-    buttonValue === 'MULTIPLICATION' &&
-    !isNaN(Number(operationState[operationState.length - 1]))
-  ) {
-    operationElement.innerHTML = prevState + ' x '
-    operationState.push('MULTIPLICATION')
-  }
+    if (
+      buttonValue === 'DIVISION' &&
+      !isNaN(Number(operationState[operationState.length - 1]))
+    ) {
+      operationElement.innerHTML = prevState + ' ÷ '
+      operationState.push('DIVISION')
+    }
 
-  if (
-    buttonValue === 'DIVISION' &&
-    !isNaN(Number(operationState[operationState.length - 1]))
-  ) {
-    operationElement.innerHTML = prevState + ' ÷ '
-    operationState.push('DIVISION')
-  }
-
-  if (buttonValue === 'CANCEL_ENTRY') {
-    const originalString = currentOperationValue.trim()
-    const processedString = originalString.replace(/\s/g, '').slice(0, -1)
-    console.log('processedString', processedString);
+    console.log(buttonValue === 'CANCEL_ENTRY');
     
-    const result = processedString
-      .replaceAll('+', ' + ')
-      .replaceAll('-', ' - ')
-      .replaceAll('x', ' x ')
-      .replaceAll('÷', ' ÷ ')
-      console.log('result', result);
-      
-    operationElement.innerHTML = result
-    operationState.pop()
-  }
+    if (buttonValue === 'CANCEL_ENTRY') {
+      const originalString = currentOperationValue.trim()
+      const processedString = originalString.replace(/\s/g, '').slice(0, -1)
+      console.log('processedString', processedString)
 
-  if (buttonValue === 'CLEAR') {
-    operationElement.innerHTML = ''
-    resultElement.innerHTML = ''
-    operationState = []
-  }
-  if (buttonValue === 'EQUAL') {
-    const result = executeOpetations()
-    resultElement.innerHTML = result
+      const result = processedString
+        .replaceAll('+', ' + ')
+        .replaceAll('-', ' - ')
+        .replaceAll('x', ' x ')
+        .replaceAll('÷', ' ÷ ')
+      console.log('result', result)
+
+      operationElement.innerHTML = result
+      operationState.pop()
+    }
+
+    if (buttonValue === 'CLEAR') {
+      operationElement.innerHTML = ''
+      resultElement.innerHTML = ''
+      operationState = []
+    }
+    if (buttonValue === 'EQUAL') {
+      const result = executeOpetations()
+      resultElement.innerHTML = result
+    }
   }
 }
 

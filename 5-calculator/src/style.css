@@ -4,7 +4,7 @@
 
 :root {
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background: linear-gradient(180deg, #807ece 0%, #9d89ec 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,7 +14,76 @@
 }
 
 body {
-  @apply font-rubik;
+  font-family: 'Rubik', sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.calculator-container {
+  width: 356px;
+  height: 566px;
+  background: #2d2a37;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+    0px 188px 52px rgba(0, 0, 0, 0.01), 0px 120px 48px rgba(0, 0, 0, 0.04),
+    0px 68px 41px rgba(0, 0, 0, 0.15), 0px 30px 30px rgba(0, 0, 0, 0.26),
+    0px 8px 17px rgba(0, 0, 0, 0.29), inset 0px 6px 8px rgba(255, 255, 255, 0.1),
+    inset 0px -4px 5px rgba(0, 0, 0, 0.22);
+  border-radius: 48px;
+}
+
+.result-screen {
+  height: 136px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 54px;
+  padding-left: 54px;
+  padding-right: 54px;
+  row-gap: 8px;
+}
+
+.operation-container {
+  text-align: right;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+
+.operation {
+  height: 24px;
+  line-height: 140%;
+  white-space: nowrap;
+  font-size: 20px;
+  color: #6b6b6b;
+}
+
+.result-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #6b6b6b;
+}
+
+.result {
+  height: 50px;
+  font-size: 36px;
+  color: #ebebeb;
+  line-height: 140%;
+}
+
+.buttons-container {
+  padding-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
 }
 
 .blackButton {
@@ -34,6 +103,14 @@ body {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: auto;
+  grid-column: span 1 / span 1;
 }
 
 .button:active {
@@ -78,14 +155,13 @@ body {
   transition-duration: 150ms;
 }
 
-.calculatorContainer {
-  width: 356px;
-  height: 566px;
-  background: #2d2a37;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
-    0px 188px 52px rgba(0, 0, 0, 0.01), 0px 120px 48px rgba(0, 0, 0, 0.04),
-    0px 68px 41px rgba(0, 0, 0, 0.15), 0px 30px 30px rgba(0, 0, 0, 0.26),
-    0px 8px 17px rgba(0, 0, 0, 0.29), inset 0px 6px 8px rgba(255, 255, 255, 0.1),
-    inset 0px -4px 5px rgba(0, 0, 0, 0.22);
-  border-radius: 48px;
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
