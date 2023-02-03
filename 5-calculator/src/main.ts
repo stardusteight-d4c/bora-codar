@@ -33,9 +33,9 @@ function rendersCalculator() {
 
   function rendersButtons(buttonsContainer: HTMLDivElement) {
     buttonsProps.map((button) => {
-      const props = button?.props
+      const props = button.props ?? undefined
       const prevState = buttonsContainer.innerHTML
-      const newChild = `<button type="button" class="${button.styles} button col-span-1">${button.content}</button>`
+      const newChild = `<button type="button" class="${button.styles} flex items-center justify-center mx-auto col-span-1">${button.content}</button>`
       if (props) {
         const attributes: string[] = []
         Object.entries(props).forEach(([key, value]: any) => {
@@ -43,7 +43,7 @@ function rendersCalculator() {
         })
         const newChild = `<button type="button" ${attributes
           .toLocaleString()
-          .replace(',', '')} class="${button.styles} button col-span-1">${
+          .replace(',', '')} class="${button.styles} flex items-center justify-center mx-auto col-span-1">${
           button.content
         }</button>`
         buttonsContainer.innerHTML = prevState + `${newChild}`
@@ -61,7 +61,6 @@ rendersCalculator()
 const buttonsContainerElement = selectElementById(
   ELEMENTS_ID.buttonsContainer
 ) as HTMLParagraphElement
-
 
 buttonsContainerElement.addEventListener('click', (event) =>
   registerOperations(event)

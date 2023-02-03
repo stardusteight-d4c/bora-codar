@@ -12,7 +12,13 @@ export function registerOperations(event: MouseEvent) {
 
   const button = event.target as HTMLButtonElement
   let prevState = operationElement.innerHTML
-  const currentOperationValue = operationElement.textContent!
+  const currentOperationValue = button.textContent!
+
+  console.log(button.dataset.metadata);
+
+  console.log(button);
+  
+  
 
   if (Number(button.value) >= 0 || Number(button.value) <= 9) {
     operationElement.innerHTML = prevState + button.value

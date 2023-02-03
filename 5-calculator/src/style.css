@@ -20,6 +20,7 @@ body {
 .blackButton {
   width: 64px;
   height: 64px;
+  font-size: 24px;
   background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.05) 0%,
@@ -42,6 +43,7 @@ body {
 .purpleButton {
   width: 64px;
   height: 64px;
+  font-size: 24px;
   background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.05) 0.01%,
@@ -60,6 +62,7 @@ body {
 .equalsButton {
   width: 64px;
   height: 64px;
+  font-size: 24px;
   background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.15) 0%,
