@@ -12,8 +12,8 @@ export function registerOperations(event: MouseEvent) {
 
   const button = event.target as HTMLButtonElement
   const buttonValue = button.getAttribute('value')
-  let prevState = operationElement.innerHTML
-  const currentOperationValue = operationElement.innerHTML
+  const prevState = operationElement.innerHTML
+  let currentOperationValue = operationElement.innerHTML
 
   if (buttonValue) {
     if (Number(buttonValue) >= 0 || Number(buttonValue) <= 9) {
@@ -61,7 +61,41 @@ export function registerOperations(event: MouseEvent) {
       operationState.push('COMMA')
     }
 
-    
+    if (
+      buttonValue === 'PLUS_MINUS' &&
+      !isNaN(Number(operationState[operationState.length - 1]))
+    ) {
+      let newArrayStrigOfOperationValue = currentOperationValue.split(' ')
+      const lastOperationValue = newArrayStrigOfOperationValue.pop()!
+
+      if (lastOperationValue.split('').includes('-')) {
+        let operationValueArray = lastOperationValue.split('')
+
+        function removeArrayElement(array: string[], elementToRemove: string) {
+          let index = array.indexOf(elementToRemove);
+          if (index > -1) {
+            array.splice(index, 1);
+          }
+          return array;
+        }
+
+        removeArrayElement(operationValueArray, '-')
+        removeArrayElement(operationValueArray, '(')
+        removeArrayElement(operationValueArray, ')')
+        const parsedValue = operationValueArray.join('')
+        newArrayStrigOfOperationValue.push(parsedValue)
+      } else {
+        newArrayStrigOfOperationValue.push(`(-${lastOperationValue})`)
+      }
+
+      const originalString = newArrayStrigOfOperationValue.join().replaceAll(',', '')
+      const result = originalString
+        .replaceAll('+', ' + ')
+        .replaceAll(/(?<!\()-/g, ' - ')
+        .replaceAll('x', ' x ')
+        .replaceAll('÷', ' ÷ ')
+      operationElement.innerHTML = result
+    }
 
     if (buttonValue === 'CANCEL_ENTRY') {
       const originalString = currentOperationValue.trim()
@@ -101,6 +135,8 @@ export function registerOperations(event: MouseEvent) {
 
 function executeOpetations() {
   let number = ''
+  console.log('operationState', operationState);
+  
   operationState.map((operationValue) => {
     if (Number(operationValue) >= 0 || Number(operationValue) <= 9) {
       number += operationValue.toLocaleString()
