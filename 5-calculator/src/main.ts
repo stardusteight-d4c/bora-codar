@@ -10,7 +10,7 @@ function rendersCalculator() {
           <div class="operation-container hide-scrollbar">
             <p id=${ELEMENTS_ID.operation} class="operation"></p>
           </div>
-          <div class="result-container">
+          <div class="result-container hide-scrollbar">
             <img src="/src/assets/equals.svg" />
             <h2 id=${ELEMENTS_ID.result} class="result"></h2>
           </div>

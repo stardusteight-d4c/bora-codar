@@ -13,9 +13,7 @@ export function registerOperations(event: MouseEvent) {
   const button = event.target as HTMLButtonElement
   const buttonValue = button.getAttribute('value')
   let prevState = operationElement.innerHTML
-  const currentOperationValue = button.dataset.metadata!
-
-  console.log(button)
+  const currentOperationValue = operationElement.innerHTML
 
   if (buttonValue) {
     if (Number(buttonValue) >= 0 || Number(buttonValue) <= 9) {
@@ -30,6 +28,7 @@ export function registerOperations(event: MouseEvent) {
       operationElement.innerHTML = prevState + ' + '
       operationState.push('ADDITION')
     }
+
     if (
       buttonValue === 'SUBTRACTION' &&
       !isNaN(Number(operationState[operationState.length - 1]))
@@ -54,20 +53,24 @@ export function registerOperations(event: MouseEvent) {
       operationState.push('DIVISION')
     }
 
-    console.log(buttonValue === 'CANCEL_ENTRY');
+    if (
+      buttonValue === 'COMMA' &&
+      !isNaN(Number(operationState[operationState.length - 1]))
+    ) {
+      operationElement.innerHTML = prevState + ','
+      operationState.push('COMMA')
+    }
+
     
+
     if (buttonValue === 'CANCEL_ENTRY') {
       const originalString = currentOperationValue.trim()
       const processedString = originalString.replace(/\s/g, '').slice(0, -1)
-      console.log('processedString', processedString)
-
       const result = processedString
         .replaceAll('+', ' + ')
         .replaceAll('-', ' - ')
         .replaceAll('x', ' x ')
         .replaceAll('÷', ' ÷ ')
-      console.log('result', result)
-
       operationElement.innerHTML = result
       operationState.pop()
     }
@@ -79,7 +82,19 @@ export function registerOperations(event: MouseEvent) {
     }
     if (buttonValue === 'EQUAL') {
       const result = executeOpetations()
-      resultElement.innerHTML = result
+      const decimalPointIndex = result.toString().indexOf('.')
+
+      if (decimalPointIndex === -1) {
+        resultElement.innerHTML = result
+      } else {
+        const decimalPlaces = result.toString().length - decimalPointIndex - 1
+        if (decimalPlaces > 4) {
+          const parseDecimal = result.toFixed(4)
+          resultElement.innerHTML = parseDecimal
+        } else {
+          resultElement.innerHTML = result
+        }
+      }
     }
   }
 }
@@ -97,6 +112,8 @@ function executeOpetations() {
       number += '*'
     } else if (operationValue === 'DIVISION') {
       number += '/'
+    } else if (operationValue === 'COMMA') {
+      number += '.'
     }
   })
   return eval(number)
