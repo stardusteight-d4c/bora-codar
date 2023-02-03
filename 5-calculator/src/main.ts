@@ -60,7 +60,7 @@ rendersCalculator()
 
 const buttonsContainerElement = selectElementById(
   ELEMENTS_ID.buttonsContainer
-) as HTMLParagraphElement
+) as HTMLDivElement
 
 buttonsContainerElement.addEventListener('click', (event) =>
   registerOperations(event)

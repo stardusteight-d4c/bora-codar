@@ -11,29 +11,27 @@ export function registerOperations(event: MouseEvent) {
   ) as HTMLHeadingElement
 
   const button = event.target as HTMLButtonElement
+  const buttonValue = button.getAttribute('value')!
   let prevState = operationElement.innerHTML
-  const currentOperationValue = button.textContent!
+  const currentOperationValue = button.dataset.metadata!
 
   console.log(button.dataset.metadata);
 
-  console.log(button);
-  
-  
 
-  if (Number(button.value) >= 0 || Number(button.value) <= 9) {
-    operationElement.innerHTML = prevState + button.value
-    operationState.push(button.value)
+  if (Number(buttonValue) >= 0 || Number(buttonValue) <= 9) {
+    operationElement.innerHTML = prevState + buttonValue
+    operationState.push(buttonValue)
   }
 
   if (
-    button.value === 'ADDITION' &&
+    buttonValue === 'ADDITION' &&
     !isNaN(Number(operationState[operationState.length - 1]))
   ) {
     operationElement.innerHTML = prevState + ' + '
     operationState.push('ADDITION')
   }
   if (
-    button.value === 'SUBTRACTION' &&
+    buttonValue === 'SUBTRACTION' &&
     !isNaN(Number(operationState[operationState.length - 1]))
   ) {
     operationElement.innerHTML = prevState + ' - '
@@ -41,7 +39,7 @@ export function registerOperations(event: MouseEvent) {
   }
 
   if (
-    button.value === 'MULTIPLICATION' &&
+    buttonValue === 'MULTIPLICATION' &&
     !isNaN(Number(operationState[operationState.length - 1]))
   ) {
     operationElement.innerHTML = prevState + ' x '
@@ -49,14 +47,14 @@ export function registerOperations(event: MouseEvent) {
   }
 
   if (
-    button.value === 'DIVISION' &&
+    buttonValue === 'DIVISION' &&
     !isNaN(Number(operationState[operationState.length - 1]))
   ) {
     operationElement.innerHTML = prevState + ' ÷ '
     operationState.push('DIVISION')
   }
 
-  if (button.value === 'CANCEL_ENTRY') {
+  if (buttonValue === 'CANCEL_ENTRY') {
     const originalString = currentOperationValue.trim()
     const processedString = originalString.replace(/\s/g, '').slice(0, -1)
     console.log('processedString', processedString);
@@ -72,12 +70,12 @@ export function registerOperations(event: MouseEvent) {
     operationState.pop()
   }
 
-  if (button.value === 'CLEAR') {
+  if (buttonValue === 'CLEAR') {
     operationElement.innerHTML = ''
     resultElement.innerHTML = ''
     operationState = []
   }
-  if (button.value === 'EQUAL') {
+  if (buttonValue === 'EQUAL') {
     const result = executeOpetations()
     resultElement.innerHTML = result
   }
