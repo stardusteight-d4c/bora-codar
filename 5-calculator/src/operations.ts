@@ -1,4 +1,6 @@
 import { ELEMENTS_ID } from './utils/elements-id'
+import { getLastOperand } from './utils/get-last-operand'
+import { removeArrayElement } from './utils/remove-array-element'
 import { selectElementById } from './utils/select-element-by-id'
 
 let operationState: string[] = []
@@ -61,6 +63,9 @@ export function registerOperations(event: MouseEvent) {
       operationState.push('COMMA')
     }
 
+    console.log(isNaN(Number(operationState[operationState.length - 1])))
+    console.log(operationState[operationState.length - 1])
+
     if (
       buttonValue === 'PLUS_MINUS' &&
       !isNaN(Number(operationState[operationState.length - 1]))
@@ -68,16 +73,48 @@ export function registerOperations(event: MouseEvent) {
       let newArrayStrigOfOperationValue = currentOperationValue.split(' ')
       const lastOperationValue = newArrayStrigOfOperationValue.pop()!
 
+      // const operationStateLastElement = operationState.pop()!
+
+      console.log(operationState)
+
+      let number = ''
+      operationState.map((operationValue) => {
+        if (Number(operationValue) >= 0 || Number(operationValue) <= 9) {
+          number += operationValue.toLocaleString()
+        } else if (operationValue === 'ADDITION') {
+          number += '+'
+        } else if (operationValue === 'SUBTRACTION') {
+          number += '-'
+        } else if (operationValue === 'MULTIPLICATION') {
+          number += '*'
+        } else if (operationValue === 'DIVISION') {
+          number += '/'
+        } else if (operationValue === 'COMMA') {
+          number += '.'
+        }
+      })
+
+      const { lastOperand, updatedOperationString } = getLastOperand(number)
+
+      console.log(
+        'lastOperand',
+        lastOperand,
+        'updatedOperationString',
+        updatedOperationString
+      )
+
+      // if (operationStateLastElement.split('').includes('-')) {
+      //   let operationValueArray = operationStateLastElement.split('')
+      //   removeArrayElement(operationValueArray, '-')
+      //   const parsedValue = operationValueArray.join('')
+      //   operationState.push(parsedValue)
+      // } else {
+      //   operationState.push(`-${operationStateLastElement}`)
+      // }
+
       if (lastOperationValue.split('').includes('-')) {
         let operationValueArray = lastOperationValue.split('')
-
-        function removeArrayElement(array: string[], elementToRemove: string) {
-          let index = array.indexOf(elementToRemove);
-          if (index > -1) {
-            array.splice(index, 1);
-          }
-          return array;
-        }
+        console.log('operationValueArray', operationValueArray)
 
         removeArrayElement(operationValueArray, '-')
         removeArrayElement(operationValueArray, '(')
@@ -88,13 +125,15 @@ export function registerOperations(event: MouseEvent) {
         newArrayStrigOfOperationValue.push(`(-${lastOperationValue})`)
       }
 
-      const originalString = newArrayStrigOfOperationValue.join().replaceAll(',', '')
+      const originalString = newArrayStrigOfOperationValue.join()
       const result = originalString
         .replaceAll('+', ' + ')
         .replaceAll(/(?<!\()-/g, ' - ')
         .replaceAll('x', ' x ')
         .replaceAll('÷', ' ÷ ')
-      operationElement.innerHTML = result
+
+       const innerResult = result.replaceAll(/, | ,/g, ' ');
+      operationElement.innerHTML = innerResult
     }
 
     if (buttonValue === 'CANCEL_ENTRY') {
@@ -135,8 +174,8 @@ export function registerOperations(event: MouseEvent) {
 
 function executeOpetations() {
   let number = ''
-  console.log('operationState', operationState);
-  
+  console.log('operationState', operationState)
+
   operationState.map((operationValue) => {
     if (Number(operationValue) >= 0 || Number(operationValue) <= 9) {
       number += operationValue.toLocaleString()
@@ -152,5 +191,8 @@ function executeOpetations() {
       number += '.'
     }
   })
+
+  console.log('number', number)
+
   return eval(number)
 }
