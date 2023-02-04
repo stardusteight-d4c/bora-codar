@@ -1,5 +1,4 @@
 import { ELEMENTS_ID } from './utils/elements-id'
-import { getLastOperand } from './utils/get-last-operand'
 import { removeArrayElement } from './utils/remove-array-element'
 import { selectElementById } from './utils/select-element-by-id'
 
@@ -43,7 +42,7 @@ export function registerOperations(event: MouseEvent) {
       buttonValue === 'MULTIPLICATION' &&
       !isNaN(Number(operationState[operationState.length - 1]))
     ) {
-      operationElement.innerHTML = prevState + ' x '
+      operationElement.innerHTML = prevState + ' * '
       operationState.push('MULTIPLICATION')
     }
 
@@ -51,7 +50,7 @@ export function registerOperations(event: MouseEvent) {
       buttonValue === 'DIVISION' &&
       !isNaN(Number(operationState[operationState.length - 1]))
     ) {
-      operationElement.innerHTML = prevState + ' ÷ '
+      operationElement.innerHTML = prevState + ' / '
       operationState.push('DIVISION')
     }
 
@@ -59,12 +58,9 @@ export function registerOperations(event: MouseEvent) {
       buttonValue === 'COMMA' &&
       !isNaN(Number(operationState[operationState.length - 1]))
     ) {
-      operationElement.innerHTML = prevState + ','
+      operationElement.innerHTML = prevState + '.'
       operationState.push('COMMA')
     }
-
-    console.log(isNaN(Number(operationState[operationState.length - 1])))
-    console.log(operationState[operationState.length - 1])
 
     if (
       buttonValue === 'PLUS_MINUS' &&
@@ -72,50 +68,8 @@ export function registerOperations(event: MouseEvent) {
     ) {
       let newArrayStrigOfOperationValue = currentOperationValue.split(' ')
       const lastOperationValue = newArrayStrigOfOperationValue.pop()!
-
-      // const operationStateLastElement = operationState.pop()!
-
-      console.log(operationState)
-
-      let number = ''
-      operationState.map((operationValue) => {
-        if (Number(operationValue) >= 0 || Number(operationValue) <= 9) {
-          number += operationValue.toLocaleString()
-        } else if (operationValue === 'ADDITION') {
-          number += '+'
-        } else if (operationValue === 'SUBTRACTION') {
-          number += '-'
-        } else if (operationValue === 'MULTIPLICATION') {
-          number += '*'
-        } else if (operationValue === 'DIVISION') {
-          number += '/'
-        } else if (operationValue === 'COMMA') {
-          number += '.'
-        }
-      })
-
-      const { lastOperand, updatedOperationString } = getLastOperand(number)
-
-      console.log(
-        'lastOperand',
-        lastOperand,
-        'updatedOperationString',
-        updatedOperationString
-      )
-
-      // if (operationStateLastElement.split('').includes('-')) {
-      //   let operationValueArray = operationStateLastElement.split('')
-      //   removeArrayElement(operationValueArray, '-')
-      //   const parsedValue = operationValueArray.join('')
-      //   operationState.push(parsedValue)
-      // } else {
-      //   operationState.push(`-${operationStateLastElement}`)
-      // }
-
       if (lastOperationValue.split('').includes('-')) {
         let operationValueArray = lastOperationValue.split('')
-        console.log('operationValueArray', operationValueArray)
-
         removeArrayElement(operationValueArray, '-')
         removeArrayElement(operationValueArray, '(')
         removeArrayElement(operationValueArray, ')')
@@ -130,9 +84,9 @@ export function registerOperations(event: MouseEvent) {
         .replaceAll('+', ' + ')
         .replaceAll(/(?<!\()-/g, ' - ')
         .replaceAll('x', ' x ')
-        .replaceAll('÷', ' ÷ ')
+        .replaceAll('/', ' / ')
 
-       const innerResult = result.replaceAll(/, | ,/g, ' ');
+      const innerResult = result.replaceAll(/, | ,/g, ' ')
       operationElement.innerHTML = innerResult
     }
 
@@ -142,8 +96,8 @@ export function registerOperations(event: MouseEvent) {
       const result = processedString
         .replaceAll('+', ' + ')
         .replaceAll('-', ' - ')
-        .replaceAll('x', ' x ')
-        .replaceAll('÷', ' ÷ ')
+        .replaceAll('*', ' * ')
+        .replaceAll('/', ' / ')
       operationElement.innerHTML = result
       operationState.pop()
     }
@@ -154,9 +108,9 @@ export function registerOperations(event: MouseEvent) {
       operationState = []
     }
     if (buttonValue === 'EQUAL') {
-      const result = executeOpetations()
-      const decimalPointIndex = result.toString().indexOf('.')
+      const result = executeOperations(currentOperationValue)
 
+      const decimalPointIndex = result.toString().indexOf('.')
       if (decimalPointIndex === -1) {
         resultElement.innerHTML = result
       } else {
@@ -172,27 +126,6 @@ export function registerOperations(event: MouseEvent) {
   }
 }
 
-function executeOpetations() {
-  let number = ''
-  console.log('operationState', operationState)
-
-  operationState.map((operationValue) => {
-    if (Number(operationValue) >= 0 || Number(operationValue) <= 9) {
-      number += operationValue.toLocaleString()
-    } else if (operationValue === 'ADDITION') {
-      number += '+'
-    } else if (operationValue === 'SUBTRACTION') {
-      number += '-'
-    } else if (operationValue === 'MULTIPLICATION') {
-      number += '*'
-    } else if (operationValue === 'DIVISION') {
-      number += '/'
-    } else if (operationValue === 'COMMA') {
-      number += '.'
-    }
-  })
-
-  console.log('number', number)
-
-  return eval(number)
+function executeOperations(operationString: string) {
+  return eval(operationString)
 }
