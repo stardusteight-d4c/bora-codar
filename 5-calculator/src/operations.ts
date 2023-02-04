@@ -1,4 +1,5 @@
 import { ELEMENTS_ID } from './utils/elements-id'
+import { getLastOperand } from './utils/get-last-operand'
 import { removeArrayElement } from './utils/remove-array-element'
 import { selectElementById } from './utils/select-element-by-id'
 
@@ -60,6 +61,18 @@ export function registerOperations(event: MouseEvent) {
     ) {
       operationElement.innerHTML = prevState + '.'
       operationState.push('COMMA')
+    }
+
+    if (
+      buttonValue === 'PERCENTAGE' &&
+      !isNaN(Number(operationState[operationState.length - 1]))
+    ) {
+      operationElement.innerHTML = prevState + '% '
+      const { lastOperand, updatedOperationString } = getLastOperand(
+        currentOperationValue
+      )
+      const decimal = Number(lastOperand) / 100
+      operationElement.innerHTML = updatedOperationString + decimal
     }
 
     if (
