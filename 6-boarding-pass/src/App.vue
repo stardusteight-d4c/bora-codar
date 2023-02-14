@@ -18,7 +18,7 @@ export default defineComponent({
 
 <template>
   <div class="flex-container">
-    <div>
+    <div class="h-fit my-auto">
       <h1 class="heading-one mx-auto w-fit">Cartão de embarque</h1>
 
       <main class="shadow-filter sm:shadow-card rounded-3xl">
@@ -118,10 +118,10 @@ export default defineComponent({
           </p>
         </div>
       </main>
+      <p class="text-white/90 inline-block !leading-[24px] mt-5 text-center w-[327px] px-2">
+        Qualquer problema procure o balcão de atendimento da sua companhia aérea
+      </p>
     </div>
-    <p class="text-white/90 inline-block !leading-[24px] mt-5 text-center w-[327px] px-2">
-      Qualquer problema procure o balcão de atendimento da sua companhia aérea
-    </p>
   </div>
 </template>
 
@@ -130,7 +130,7 @@ span {
   @apply text-sm font-normal !leading-[16.59px] !tracking-[-0.02em];
 }
 .flex-container {
-  @apply flex flex-col items-center justify-center py-[50px];
+  @apply flex flex-col items-center justify-center h-screen;
 }
 .heading-one {
   @apply text-xl font-medium text-white mb-5;
