@@ -5,19 +5,51 @@ import illustration02 from '../assets/illustration02.svg'
 import searchIcon from '../assets/search.svg'
 import locationIcon from '../assets/location.svg'
 import chevronDown from '../assets/chevron-down.svg'
+import { availableCities } from '../mockData'
 
 export default defineComponent({
   name: 'Header',
   data() {
     return {
+      showDropdown: false,
+      selectedCity: null as String | null,
+      searchTerm: '',
+      availableCities,
       assets: {
         illustration01,
         illustration02,
         searchIcon,
         locationIcon,
-        chevronDown
+        chevronDown,
       },
     }
+  },
+  mounted() {
+    window.addEventListener('click', this.handleClickOutside)
+  },
+  beforeUnmount() {
+    window.removeEventListener('click', this.handleClickOutside)
+  },
+  methods: {
+    handleClickOutside(event: MouseEvent) {
+      if (
+        this.$refs.dropdown &&
+        !(this.$refs.dropdown as HTMLElement).contains(event.target as Node)
+      ) {
+        this.showDropdown = false
+      }
+    },
+    searchBlocks() {
+      this.selectedCity = null
+      this.$emit('search', this.searchTerm)
+    },
+    handleDropdown() {
+      this.showDropdown = !this.showDropdown
+    },
+    handleSelectedCity(selectedCity: string) {
+      this.selectedCity = selectedCity
+      this.$emit('selectedCity', this.selectedCity)
+    },
   },
 })
 </script>
@@ -32,12 +64,27 @@ export default defineComponent({
       <div class="search-container">
         <div class="input-container">
           <img v-bind:src="assets.searchIcon" class="icon" />
-          <input type="text" placeholder="Pesquise por nome" class="input" />
+          <input
+            v-model="searchTerm"
+            @input="searchBlocks"
+            type="text"
+            placeholder="Pesquise por nome"
+            class="input"
+          />
         </div>
-        <div class="input-container">
+        <div ref="dropdown" @click="handleDropdown" class="input-container">
           <img v-bind:src="assets.locationIcon" class="icon" />
-          <div class="input">Selecione uma cidade</div>
+          <div class="input">{{ selectedCity ?? 'Selecione uma cidade' }}</div>
           <img v-bind:src="assets.chevronDown" class="chevron" />
+          <ul v-if="showDropdown" class="dropdown">
+            <li
+              v-for="city in availableCities"
+              :key="city"
+              @click="handleSelectedCity(city)"
+            >
+              {{ city }}
+            </li>
+          </ul>
         </div>
         <div class="button-container">
           <button>Buscar agora</button>
@@ -48,6 +95,13 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.dropdown ul {
+  position: absolute;
+  display: none;
+}
+.dropdown:hover ul {
+  display: block;
+}
 header {
   padding-top: 100px;
   background-color: #f8f8ff;
@@ -115,6 +169,7 @@ strong {
   position: relative;
 }
 .input {
+  cursor: pointer;
   background-color: #f4f4ff;
   text-align: left;
   color: #7c7c8a;
@@ -155,5 +210,24 @@ button {
   line-height: 24px;
   border: none;
   outline: none;
+}
+.dropdown {
+  top: 45px;
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 4px;
+  inset-inline: 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+li {
+  padding: 4px;
+  font-size: 20px;
+  font-weight: 400;
+  border-bottom: 1px solid #eaeaea;
+  cursor: pointer;
+}
+li:hover {
+  background-color: #e7e7e7;
 }
 </style>

@@ -9,14 +9,29 @@ export default defineComponent({
   data() {
     return {
       blocks,
+      filteredBlocks: blocks,
     }
+  },
+  methods: {
+    handleSearch(searchTerm: string) {
+      this.filteredBlocks = this.blocks.filter((block) =>
+        block.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
+      )
+    },
+    handleSelectedCity(selectedCity: string) {
+      this.filteredBlocks = this.blocks.filter((block) =>
+        block.location
+          .toLocaleLowerCase()
+          .includes(selectedCity.toLocaleLowerCase())
+      )
+    },
   },
   components: { Header, Card },
 })
 </script>
 
 <template>
-  <Header />
+  <Header @search="handleSearch" @selectedCity="handleSelectedCity" />
   <main>
     <div class="main-content">
       <div class="heading-container">
@@ -27,7 +42,7 @@ export default defineComponent({
         </div>
       </div>
       <div class="cards-wrapper">
-        <div v-for="block in blocks" :key="block.title">
+        <div v-for="block in filteredBlocks" :key="block.title">
           <Card v-bind="{ ...block }" />
         </div>
       </div>

@@ -80,3 +80,12 @@ export const blocks: Array<Blocks> = [
     location: 'São Paulo - SP',
   },
 ]
+
+export const availableCities = [
+  'Florianópolis - SC',
+  'São Paulo - SP',
+  'Curitiba - PR',
+  'Salvador - BA',
+  'Rio de Janeiro - RJ',
+  'Porto Alegre - RS',
+]
