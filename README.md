@@ -41,14 +41,14 @@
     <tbody>
         <tr>
             <td>01</td>
-            <td><a href="1-music-player">Music Player </a></td>
+            <td><a href="1-music-player">Player de Música</a></td>
             <td>11/01/23</td>
             <td align="center">
             <a href="1-music-player"><img width="300px" src="1-music-player/banner.png" /></a></td>
         </tr>
         <tr>
             <td>02</td>
-            <td><a href="2-product-card">Product Card</a></td>
+            <td><a href="2-product-card">Cartão de Produto</a></td>
             <td>18/01/23</td>
             <td align="center"><a href="2-product-card"><img width="300px" src="2-product-card/banner.png" /></a></td>
         </tr>
@@ -72,7 +72,7 @@
         </tr>
         <tr>
             <td>06</td>
-            <td><a href="6-boarding-pass">Cartão de embarque</a></td>
+            <td><a href="6-boarding-pass">Cartão de Embarque</a></td>
             <td>15/02/23</td>
             <td align="center" ><a href="6-boarding-pass"><img width="300px" src="6-boarding-pass/banner.png" /></a></td>
         </tr>
