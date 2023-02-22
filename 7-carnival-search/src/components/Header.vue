@@ -62,11 +62,13 @@ header {
 }
 .illustration01 {
   position: absolute;
+  z-index: 0;
   top: -30px;
   left: -35px;
 }
 .illustration02 {
   position: absolute;
+  z-index: 0;
   bottom: 0px;
   right: 0px;
 }
@@ -74,6 +76,7 @@ header {
   text-align: center;
   max-width: 995px;
   width: 100%;
+  z-index: 5;
 }
 span {
   color: #e45858;
@@ -137,12 +140,7 @@ strong {
   right: 8px;
   cursor: pointer;
 }
-.button-container {
-  position: relative;
-  display: block;
-  width: 169px;
-  height: 48px;
-}
+
 button {
   background: #6246ea;
   border-radius: 5px;
@@ -152,8 +150,6 @@ button {
   font-weight: 700;
   color: #ffffff;
   cursor: pointer;
-  position: absolute;
-  inset: 0;
   text-transform: uppercase;
   font-size: 14px;
   line-height: 24px;
