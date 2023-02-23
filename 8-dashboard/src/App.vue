@@ -9,14 +9,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <main>
-    <pie-chart :percentage="85" />
-  </main>
+    <pie-chart :percent="50"  />
 </template>
 
 <style scoped>
-main {
-  padding: 80px;
-}
-
 </style>

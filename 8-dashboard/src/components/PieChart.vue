@@ -2,19 +2,24 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'pie-chart',
+  name: 'PieChart',
   props: {
-    percentage: {
+    percent: {
       type: Number,
       required: true,
-      default: 0,
       validator: (value: number) => value >= 0 && value <= 100,
+    },
+    size: {
+      type: Number,
+      default: 100,
+      validator: (value: number) => value > 0,
     },
   },
   computed: {
-    strokeDashoffset(): number {
-      const circumference = 2 * Math.PI * 15.91549430918954 // 2 * π * radius
-      return circumference * (1 - this.percentage / 100)
+    circleStyle(): Record<string, string> {
+      const circumference = (this.size - 10) * Math.PI
+      const offset = circumference - (this.percent / 100) * circumference
+      return { strokeDashoffset: `${offset}px` }
     },
   },
 })
@@ -22,49 +27,53 @@ export default defineComponent({
 
 <template>
   <div class="pie-chart">
-    <svg viewBox="0 0 32 32">
-      <circle class="bg-circle" cx="16" cy="16" r="15.91549430918954"></circle>
+    <svg :width="size" :height="size">
+      <circle
+        class="bg-circle"
+        :cx="size / 2"
+        :cy="size / 2"
+        :r="size / 2 - 5"
+      />
       <circle
         class="fg-circle"
-        cx="16"
-        cy="16"
-        r="15.91549430918954"
-        :style="{ strokeDashoffset }"
-      ></circle>
-      <text class="percentage" x="50%" y="50%" text-anchor="middle">
-        {{ percentage }}%
-      </text>
+        :cx="size / 2"
+        :cy="size / 2"
+        :r="size / 2 - 5"
+        :style="circleStyle"
+      />
     </svg>
+    <span class="percent">{{ percent }}%</span>
   </div>
 </template>
 
 <style scoped>
 .pie-chart {
   display: inline-block;
-  width: 100px;
-  height: 100px;
   position: relative;
+  text-align: center;
 }
-
+svg {
+  transform: rotate(-85deg);
+}
+.percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: bold;
+}
 .bg-circle {
   fill: none;
-  stroke: #ddd;
-  stroke-width: 2;
+  stroke: #e6e6e6;
+  stroke-width: 10;
+  stroke-linecap: round;
 }
-
 .fg-circle {
   fill: none;
-  stroke: #2196f3;
-  stroke-width: 2;
-  stroke-dasharray: 100;
-  transform: rotate(-90deg);
-  transform-origin: 50% 50%;
-  transition: stroke-dashoffset 0.5s ease-in-out;
-}
-
-.percentage {
-  font-size: 1em;
-  font-weight: bold;
-  fill: #333;
+  stroke: #3f51b5;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 285px;
 }
 </style>
