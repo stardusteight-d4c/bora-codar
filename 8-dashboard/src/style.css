@@ -128,3 +128,7 @@ body {
   color: #ffffff;
   font-family: 'Inter', sans-serif;
 }
+
+html, body, #app {
+  min-height: 100vh;
+}

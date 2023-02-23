@@ -33,22 +33,26 @@ export default defineComponent({
 
 <template>
   <div class="donut-chart">
-    <svg :width="size + 5" :height="size + 5">
+    <svg :width="size + 10" :height="size + 10">
       <circle
         class="bg-circle"
-        :cx="(size + 5) / 2"
-        :cy="(size + 5) / 2"
+        :cx="(size + 10) / 2"
+        :cy="(size + 10) / 2"
         :r="radius"
       />
       <circle
+        v-if="percent > 0"
         class="fg-circle"
-        :cx="(size + 5) / 2"
-        :cy="(size + 5) / 2"
+        :cx="(size + 10) / 2"
+        :cy="(size + 10) / 2"
         :r="radius"
         :style="circleStyle"
       />
     </svg>
-    <span class="percent">{{ percent }}%</span>
+    <div class="percent-container">
+      <span class="percent">{{ percent }}%</span>
+      <span class="percent-span">alcançada</span>
+    </div>
   </div>
 </template>
 
@@ -58,24 +62,37 @@ export default defineComponent({
   position: relative;
   text-align: center;
 }
-.percent {
+.percent-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 14px;
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.percent {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 160%;
+}
+.percent-span {
+  margin-top: -10px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
 }
 .bg-circle {
   fill: none;
-  stroke: #e6e6e6;
-  stroke-width: 14;
+  stroke: #4A4556;
+  overflow: hidden;
+  stroke-width: 19;
   stroke-linecap: round;
 }
 .fg-circle {
   fill: none;
   stroke: #3f51b5;
-  stroke-width: 15;
+  stroke-width: 20;
   stroke-linecap: round;
 }
 </style>
