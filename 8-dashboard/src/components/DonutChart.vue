@@ -1,8 +1,18 @@
+<template>
+  <div class="donut-chart">
+    <svg :width="size" :height="size">
+      <circle class="bg-circle" :cx="size/2" :cy="size/2" :r="radius" />
+      <circle class="fg-circle" :cx="size/2" :cy="size/2" :r="radius" :style="circleStyle" />
+    </svg>
+    <span class="percent">{{ percent }}%</span>
+  </div>
+</template>
+
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'PieChart',
+  name: 'DonutChart',
   props: {
     percent: {
       type: Number,
@@ -16,44 +26,26 @@ export default defineComponent({
     },
   },
   computed: {
+    radius(): number {
+      return (this.size / 2) - 5;
+    },
     circleStyle(): Record<string, string> {
-      const circumference = (this.size - 10) * Math.PI
-      const offset = circumference - (this.percent / 100) * circumference
-      return { strokeDashoffset: `${offset}px` }
+      const circumference = 2 * Math.PI * this.radius;
+      const fillLength = (this.percent / 100) * circumference;
+      return {
+        strokeDasharray: `${fillLength} ${circumference - fillLength}`,
+        strokeDashoffset: `${circumference - fillLength}px`,
+      };
     },
   },
-})
+});
 </script>
 
-<template>
-  <div class="pie-chart">
-    <svg :width="size" :height="size">
-      <circle
-        class="bg-circle"
-        :cx="size / 2"
-        :cy="size / 2"
-        :r="size / 2 - 5"
-      />
-      <circle
-        class="fg-circle"
-        :cx="size / 2"
-        :cy="size / 2"
-        :r="size / 2 - 5"
-        :style="circleStyle"
-      />
-    </svg>
-    <span class="percent">{{ percent }}%</span>
-  </div>
-</template>
-
 <style scoped>
-.pie-chart {
+.donut-chart {
   display: inline-block;
   position: relative;
   text-align: center;
-}
-svg {
-  transform: rotate(-85deg);
 }
 .percent {
   position: absolute;
@@ -74,6 +66,5 @@ svg {
   stroke: #3f51b5;
   stroke-width: 10;
   stroke-linecap: round;
-  stroke-dasharray: 285px;
 }
 </style>

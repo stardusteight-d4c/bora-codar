@@ -1,15 +1,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PieChart from './components/PieChart.vue'
+import DonutChart from './components/DonutChart.vue'
 
 export default defineComponent({
   name: 'App',
-  components: { PieChart },
+  components: { DonutChart },
 })
 </script>
 
 <template>
-    <pie-chart :percent="50"  />
+    <donut-chart :percent="5" :size="100"  />
 </template>
 
 <style scoped>
