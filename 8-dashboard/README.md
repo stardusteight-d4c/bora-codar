@@ -1,4 +1,4 @@
-# Desafio 7 (Um buscador de blocos)
+# Desafio 8 (Um dashboard)
 
 ![banner](banner.png)
 ![project](project.png)
