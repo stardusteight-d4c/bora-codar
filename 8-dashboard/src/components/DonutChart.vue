@@ -1,15 +1,5 @@
-<template>
-  <div class="donut-chart">
-    <svg :width="size" :height="size">
-      <circle class="bg-circle" :cx="size/2" :cy="size/2" :r="radius" />
-      <circle class="fg-circle" :cx="size/2" :cy="size/2" :r="radius" :style="circleStyle" />
-    </svg>
-    <span class="percent">{{ percent }}%</span>
-  </div>
-</template>
-
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'DonutChart',
@@ -27,19 +17,40 @@ export default defineComponent({
   },
   computed: {
     radius(): number {
-      return (this.size / 2) - 5;
+      return this.size / 2 - 5
     },
     circleStyle(): Record<string, string> {
-      const circumference = 2 * Math.PI * this.radius;
-      const fillLength = (this.percent / 100) * circumference;
+      const circumference = 2 * Math.PI * this.radius
+      const fillLength = (this.percent / 100) * circumference
       return {
         strokeDasharray: `${fillLength} ${circumference - fillLength}`,
         strokeDashoffset: `${circumference - fillLength}px`,
-      };
+      }
     },
   },
-});
+})
 </script>
+
+<template>
+  <div class="donut-chart">
+    <svg :width="size + 5" :height="size + 5">
+      <circle
+        class="bg-circle"
+        :cx="(size + 5) / 2"
+        :cy="(size + 5) / 2"
+        :r="radius"
+      />
+      <circle
+        class="fg-circle"
+        :cx="(size + 5) / 2"
+        :cy="(size + 5) / 2"
+        :r="radius"
+        :style="circleStyle"
+      />
+    </svg>
+    <span class="percent">{{ percent }}%</span>
+  </div>
+</template>
 
 <style scoped>
 .donut-chart {
@@ -58,13 +69,13 @@ export default defineComponent({
 .bg-circle {
   fill: none;
   stroke: #e6e6e6;
-  stroke-width: 10;
+  stroke-width: 14;
   stroke-linecap: round;
 }
 .fg-circle {
   fill: none;
   stroke: #3f51b5;
-  stroke-width: 10;
+  stroke-width: 15;
   stroke-linecap: round;
 }
 </style>
