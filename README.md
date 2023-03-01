@@ -82,5 +82,11 @@
             <td>22/02/23</td>
             <td align="center" ><a href="7-carnival-search"><img width="300px" src="7-carnival-search/banner.png" /></a></td>
         </tr>
+        <tr>
+            <td>08</td>
+            <td><a href="8-dashboard">Dashboard</a></td>
+            <td>01/03/23</td>
+            <td align="center" ><a href="8-dashboard"><img width="300px" src="8-dashboard/banner.png" /></a></td>
+        </tr>
     </tbody>
 </table></p>
