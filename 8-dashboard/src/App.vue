@@ -52,7 +52,7 @@ export default defineComponent({
           </div>
         </div>
         <div>
-          <img :src="assets.weekDaysPlaceholder" />
+         
         </div>
       </section>
     </div>

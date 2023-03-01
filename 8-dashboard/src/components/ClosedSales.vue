@@ -3,55 +3,15 @@ import { defineComponent } from 'vue'
 import DonutChart from './DonutChart.vue'
 
 export default defineComponent({
-    name: "ClosedSales",
-    data() {
-        return {
-            percent: 45,
-            timerId: undefined as number | undefined,
-            intervalTime: 60,
-            step: 1,
-        };
-    },
-    methods: {
-        startTimer(action: "increase" | "decrease") {
-            this.timerId = setInterval(() => {
-                if (action === "increase" && this.percent < 100) {
-                    this.percent += this.step;
-                }
-                else if (action === "decrease" && this.percent > 0) {
-                    this.percent -= this.step;
-                }
-            }, this.intervalTime);
-        },
-        stopTimer() {
-            clearInterval(this.timerId);
-            this.timerId = undefined;
-        },
-    },
-    components: { DonutChart }
+  name: 'ClosedSales',
+  components: { DonutChart },
 })
 </script>
 
 <template>
   <div class="card">
     <h1 class="card-h1">Vendas fechadas</h1>
-    <DonutChart :percent="percent" :size="150" />
-    <div class="button-container">
-          <button
-            class="button"
-            @mousedown="startTimer('increase')"
-            @mouseup="stopTimer"
-          >
-            +
-          </button>
-          <button
-            class="button"
-            @mousedown="startTimer('decrease')"
-            @mouseup="stopTimer"
-          >
-            -
-          </button>
-        </div>
+    <DonutChart :percentage="50" />
     <div class="card-span">
       <div class="span-container">
         <div class="circle-span-expected"></div>

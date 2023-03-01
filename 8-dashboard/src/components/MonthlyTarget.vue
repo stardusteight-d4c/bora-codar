@@ -11,7 +11,7 @@ export default defineComponent({
 <template>
   <div class="card">
     <h1 class="card-h1">Meta mensal</h1>
-    <DonutChart :percent="90" :size="150" />
+    <DonutChart :percentage="25"  />
     <div class="card-span">
       <div class="span-container">
         <div class="circle-span-expected"></div>
