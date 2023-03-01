@@ -30,7 +30,7 @@ export default defineComponent({
   background-color: #363447;
   box-shadow: 3px 4px 26px rgba(0, 0, 0, 0.25);
   width: fit-content;
-  padding: 29px 48px;
+  padding: 29px 50px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;

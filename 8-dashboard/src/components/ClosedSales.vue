@@ -11,7 +11,7 @@ export default defineComponent({
 <template>
   <div class="card">
     <h1 class="card-h1">Vendas fechadas</h1>
-    <DonutChart :percentage="50" />
+      <DonutChart :percentage="70" />
     <div class="card-span">
       <div class="span-container">
         <div class="circle-span-expected"></div>
@@ -42,7 +42,7 @@ export default defineComponent({
   font-weight: 600;
   font-size: 24px;
   line-height: 160%;
-  margin-bottom: auto;
+  margin-bottom: 16px;
 }
 .card-span {
   margin-top: 55px;
@@ -52,7 +52,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   column-gap: 20px;
-  margin-top: auto;
+  margin-top: 16px;
 }
 .span-container {
   display: flex;
@@ -77,4 +77,5 @@ export default defineComponent({
   font-size: 14px;
   line-height: 160%;
 }
+
 </style>

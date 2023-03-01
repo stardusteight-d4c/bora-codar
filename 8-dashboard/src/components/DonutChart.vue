@@ -23,6 +23,10 @@ export default defineComponent({
 </script>
 
 <template>
+  <div class="percentage-info-container">
+    <h2>{{ percentage }}%</h2>
+    <span>alcançada</span>
+  </div>
   <svg
     viewBox="0 0 232 232"
     :key="percentage"
@@ -36,6 +40,7 @@ export default defineComponent({
       stroke="url(#paint0_linear_201_85)"
       :style="circleStyle"
     />
+
     <defs>
       <linearGradient
         id="paint0_linear_201_85"
@@ -53,7 +58,23 @@ export default defineComponent({
 </template>
 
 <style scoped>
-/* No Firefox não funciona */
+.percentage-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  margin-top: 18px;
+}
+h2 {
+  font-weight: 700;
+  font-size: 34px;
+}
+span {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+}
 
 svg {
   /* 19.7rem -> 315.2px */
@@ -61,7 +82,6 @@ svg {
   height: 19.7rem;
   transform: rotate(-90deg);
 }
-
 svg circle {
   /* (2 * π * r) -> 2 * 3,14 * 98,5 = 618  */
   stroke-dasharray: 618;
@@ -69,11 +89,9 @@ svg circle {
   stroke-width: 30;
   fill: none;
 }
-
 svg circle:nth-child(1) {
   stroke-dashoffset: 0;
 }
-
 svg circle:nth-child(2) {
   /* (2 * π * r - (2 * π * r * percentage)) / 100 */
   /* (2 * 13,14 * 98.5 - (2 * 13,14 * 98.5 * percentage)) / 100 */
@@ -83,7 +101,6 @@ svg circle:nth-child(2) {
 
   animation: progress 1s ease-in-out;
 }
-
 @keyframes progress {
   0% {
     stroke-dasharray: 618;

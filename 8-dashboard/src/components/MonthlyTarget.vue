@@ -1,17 +1,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import DonutChart from './DonutChart.vue';
+import DonutChart from './DonutChart.vue'
 
 export default defineComponent({
-    name: "MonthlyTarget",
-    components: { DonutChart }
+  name: 'MonthlyTarget',
+  components: { DonutChart },
 })
 </script>
 
 <template>
   <div class="card">
     <h1 class="card-h1">Meta mensal</h1>
-    <DonutChart :percentage="25"  />
+    <DonutChart :percentage="90" />
     <div class="card-span">
       <div class="span-container">
         <div class="circle-span-expected"></div>
@@ -42,7 +42,7 @@ export default defineComponent({
   font-weight: 600;
   font-size: 24px;
   line-height: 160%;
-  margin-bottom: auto;
+  margin-bottom: 16px;
 }
 
 .card-span {
@@ -53,7 +53,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   column-gap: 20px;
-  margin-top: auto;
+  margin-top: 16px;
 }
 .span-container {
   display: flex;
