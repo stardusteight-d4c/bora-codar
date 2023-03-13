@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,19 +23,66 @@
         <h2>Conversor de moedas</h2>
         <div class="wrapper">
           <div class="money-container">
-            <input type="text" value="$1.000" class="amount" />
+            <input id="amount01" type="text" value="1.000" class="amount" />
             <div class="dropdown">
-              <div class="selected">USD</div>
-              <ul>
-                <li>BRL</li>
-                <li>USD</li>
-                <li>EUR</li>
-                <li>GBP</li>
+              <div id="selected01" class="selected">
+                <img src="./assets/flags/USD.svg" id="flag01" class="flag" />
+                <span id="selected-txt-value01">USD</span>
+                <img src="./assets/chevron-down.svg" class="chevron-down01" />
+              </div>
+              <ul id="options01" class="options">
+                <div class="options-container">
+                  <li class="option option01">
+                    <img src="./assets/flags/BRL.svg" class="flag" /> BRL
+                  </li>
+                  <li class="option option01">
+                    <img src="./assets/flags/EUR.svg" class="flag" /> EUR
+                  </li>
+                  <li class="option option01">
+                    <img src="./assets/flags/JPY.svg" class="flag" /> JPY
+                  </li>
+                  <li class="option option01">
+                    <img src="./assets/flags/CNY.svg" class="flag" /> CNY
+                  </li>
+                  <li class="option option01">
+                    <img src="./assets/flags/CHF.svg" class="flag" /> CHF
+                  </li>
+                </div>
               </ul>
             </div>
           </div>
-          <div class="middle"></div>
-          <div class="money-container"></div>
+          <div class="middle">
+            <img src="./assets/arrows-exchange.svg" alt="" />
+          </div>
+          <div class="money-container">
+            <input id="amount02" type="text" value="1.000" class="amount" />
+            <div class="dropdown">
+              <div id="selected02" class="selected">
+                <img src="./assets/flags/USD.svg" id="flag02" class="flag" />
+                <span id="selected-txt-value02">USD</span>
+                <img src="./assets/chevron-down.svg" class="chevron-down02" />
+              </div>
+              <ul id="options02" class="options">
+                <div class="options-container">
+                  <li class="option option02">
+                    <img src="./assets/flags/BRL.svg" class="flag" /> BRL
+                  </li>
+                  <li class="option option02">
+                    <img src="./assets/flags/EUR.svg" class="flag" /> EUR
+                  </li>
+                  <li class="option option02">
+                    <img src="./assets/flags/JPY.svg" class="flag" /> JPY
+                  </li>
+                  <li class="option option02">
+                    <img src="./assets/flags/CNY.svg" class="flag" /> CNY
+                  </li>
+                  <li class="option option02">
+                    <img src="./assets/flags/CHF.svg" class="flag" /> CHF
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
       <section class="exchange-rate">
