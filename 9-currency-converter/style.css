@@ -99,13 +99,12 @@ h2 {
 }
 
 .exchange-rate .wrapper {
-  border: 0.1rem solid red;
   margin-top: 2.4rem;
 }
 
 .money-container {
   background-color: white;
-  border: 0.1rem solid #94a3b8;
+  border: 0.2rem solid #94a3b8;
   width: 27rem;
   height: 5.6rem;
   border-radius: 0.8rem;
@@ -152,11 +151,13 @@ h2 {
 .middle img {
   width: 2.4rem;
   height: 2.4rem;
+  cursor: pointer;
 }
 
 ul.options {
   position: absolute;
   width: 16rem;
+  z-index: 900;
   height: 17rem;
   display: none;
   overflow: hidden;
@@ -190,4 +191,63 @@ li.option:hover {
   object-fit: cover;
   width: 2.4rem;
   height: 2.4rem;
+}
+
+.tooltip {
+  background-color: white;
+  box-shadow: 0 0.4rem 1.6rem rgb(15 23 42 / 0.15);
+  border-radius: 0.4rem;
+  padding: 0.8rem;
+}
+
+.chart-controls {
+  display: flex;
+  justify-content: space-between;
+  margin: -2.2rem 0.8rem 0 4rem;
+}
+
+.chart-controls button {
+  background-color: transparent;
+  border: 0;
+
+  width: 4rem;
+  height: 2.4rem;
+
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.chart-controls button:hover,
+.chart-controls button.active {
+  background-color: #7c3aed;
+  color: white;
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+}
+
+#amount02 {
+  cursor: default;
+}
+
+@media (max-width: 48rem) {
+  main {
+    padding: 1.6rem;
+    gap: 3.2rem;
+  }
+
+  section h2 {
+    font-size: 1.6rem;
+  }
+
+  .currency-converter .wrapper {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .money-wrapper {
+    width: 100%;
+  }
 }
